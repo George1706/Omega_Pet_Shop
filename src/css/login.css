@@ -1,0 +1,9 @@
+.login-background {
+  background-image: url('../img/OMEGA.png'); /* Ruta a tu imagen de fondo */
+  background-size: cover;
+  background-position: center;
+}
+
+.formulario-bajo {
+  margin-top: 170px; /* Ajusta el valor para establecer la distancia deseada hacia abajo */
+}

@@ -1,0 +1,69 @@
+{
+  "Usuarios": [
+    {
+      "nombre": "Jorge",
+      "email": "jpinedacare@gmail.com",
+      "nit": "",
+      "telefono": "3214781761",
+      "password": "Jorge123456",
+      "rol": "administrador",
+      "id": 1
+    },
+    {
+      "nombre": "Jorge Jaird",
+      "email": "jp728476@gmail.com",
+      "nit": "",
+      "telefono": "3124018772",
+      "password": "Jorgejaird123456",
+      "rol": "cliente",
+      "id": 2
+    }
+  ],
+  "Categorias": [
+    {
+      "nombre": "Comida",
+      "id": 1
+    }
+  ],
+  "Tiendas": [
+    {
+      "nombre": "CatsAndDogs",
+      "direccion": "calle34 B # 32 - A 32",
+      "id": 1
+    }
+  ],
+  "Ventas": [
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Dogumert Comida",
+      "direccion": "calle34 B # 32 - A 78",
+      "telefono": "3124018772",
+      "id": 1
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Jorge",
+      "direccion": "carrera 93 B # 130 A 56",
+      "telefono": "3124018772",
+      "id": 2
+    }
+  ],
+  "Productos": [
+    {
+      "idT": "1",
+      "idC": "Comida",
+      "nombre": "Dogumert Comida",
+      "precio": "500000",
+      "id": 1
+    },
+    {
+      "idT": "1",
+      "idC": "Accesorios",
+      "nombre": "Cama Perro",
+      "precio": "10000",
+      "id": 2
+    }
+  ]
+}
