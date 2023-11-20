@@ -64,7 +64,7 @@ const EditarPedidos = () => {
         const idPedidoEditado = response.id;
 
         if (idPedidoEditado !== idPe) {
-            navigate(`/proyectos-admin`)
+            navigate(`/ProyectosAdmin`)
             const msg = "El pedido fue editado correctamente";
             new swal({
                 title: 'Información',

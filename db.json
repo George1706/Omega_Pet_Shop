@@ -17,12 +17,34 @@
       "password": "Jorgejaird123456",
       "rol": "cliente",
       "id": 2
+    },
+    {
+      "nombre": "Jaird Pineda",
+      "email": "jaird@live.com",
+      "nit": "",
+      "telefono": "3245678903",
+      "password": "Jorge123",
+      "rol": "cliente",
+      "id": 3
+    },
+    {
+      "nombre": "jean",
+      "email": "jeanCarlo@gmail.com",
+      "nit": "",
+      "telefono": "3245678903",
+      "password": "Jean123",
+      "rol": "administrador",
+      "id": 4
     }
   ],
   "Categorias": [
     {
       "nombre": "Comida",
       "id": 1
+    },
+    {
+      "nombre": "Accesorios",
+      "id": 2
     }
   ],
   "Tiendas": [
@@ -30,6 +52,11 @@
       "nombre": "CatsAndDogs",
       "direccion": "calle34 B # 32 - A 32",
       "id": 1
+    },
+    {
+      "nombre": "Perricatss",
+      "direccion": "diagonal 69 sur",
+      "id": 2
     }
   ],
   "Ventas": [
@@ -48,6 +75,14 @@
       "direccion": "carrera 93 B # 130 A 56",
       "telefono": "3124018772",
       "id": 2
+    },
+    {
+      "idP": "2",
+      "nombreProd": "Perricatss",
+      "nombre": "Jorge",
+      "direccion": "carrera 45 67 68",
+      "telefono": "3234567890",
+      "id": 3
     }
   ],
   "Productos": [

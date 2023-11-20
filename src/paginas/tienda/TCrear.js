@@ -18,10 +18,13 @@ const TCrear = () => {
         nombre: '',
         precio:'',
         idT:'',
-        idC:''
+        idC:'',
+        telefono:'',
+        correo:'',
+        horariosAtencion:''
     })
 
-    const { nombre, idC , precio} = productos;
+    const { nombre, idC , precio, telefono, correo} = productos;
 
 
 
@@ -51,7 +54,9 @@ const TCrear = () => {
             idT: idTienda,
             idC:productos.idC,
             nombre: productos.nombre,
-            precio:productos.precio
+            precio:productos.precio,
+            telefono:productos.telefono,
+            correo:productos.correo
         }
 
         const response = await APIInvoke.invokePOST('/productos', data);
@@ -93,12 +98,24 @@ const TCrear = () => {
 
         }
     }
-
+    const [categorias, setCategorias] = useState([]); // Agregar estado para almacenar las categorías
     const onSubmit = (e) => {
         e.preventDefault();
         crearTarea()
     }
-
+    useEffect(() => {
+        // Lógica para obtener las categorías de tu API o de donde las tengas almacenadas
+        const obtenerCategorias = async () => {
+            try {
+                const response = await APIInvoke.invokeGET('/categorias'); // Reemplaza '/categorias' por tu endpoint correcto
+                setCategorias(response); // Actualizar el estado con las categorías obtenidas
+            } catch (error) {
+                console.error('Error al obtener las categorías:', error);
+            }
+        };
+    
+        obtenerCategorias(); // Llamar a la función para obtener las categorías al cargar el componente
+    }, []);
     return (
         <div className="wrapper">
             <Navbar></Navbar>
@@ -135,10 +152,24 @@ const TCrear = () => {
                                         <input type="text" className="form-control" id="precio" name="precio" placeholder="Ingrese el precio del producto" value={precio} onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="idC">Categoría:</label>
-                                        <input type="text" className="form-control" id="idC" name="idC" placeholder="Ingrese la categoría" value={idC} onChange={onChange} required />
+                                    <label htmlFor="idC">Categoría:</label>
+                                    <select className="form-control" id="idC" name="idC" value={idC} onChange={onChange} required>
+                                        <option value="">Seleccione una categoría</option>
+                                        {categorias.map((categoria) => (
+                                            <option key={categoria.id} value={categoria.id}>
+                                                {categoria.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
                                     </div>
-
+                                    <div className="form-group">
+                                        <label htmlFor="telefono">Telefono:</label>
+                                        <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" value={telefono} onChange={onChange} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="correo">Correo:</label>
+                                        <input type="text" className="form-control" id="correo" name="correo" placeholder="Ingrese el correo" value={correo} onChange={onChange} required />
+                                    </div>
                                 </div>
 
                                 <div className="card-footer">
