@@ -50,7 +50,7 @@ const ProyectosAdmin = () => {
         const tiendaExistente = await verificarExistenciaTiendas(id);
 
         if (tiendaExistente) {
-            const response = await APIInvoke.invokeDELETE(`/tiendas/${id}`);
+            const response = await APIInvoke.invokeDELETE(`/Tiendas/${id}`);
             const msg = "Tienda Eliminada Correctamente";
             new swal({
                 title: "Informacion",
@@ -68,7 +68,7 @@ const ProyectosAdmin = () => {
             });
             cargarTiendas();
         } else {
-            const msg = "La tienda No Pudo Ser Eliminado";
+            const msg = "La Tienda No Se Pudo Eliminar";
             new swal({
                 title: "Error",
                 text: msg,
@@ -101,7 +101,7 @@ const ProyectosAdmin = () => {
                 <section className="content">
                     <div className="card">
                         <div className="card-header">
-                        <h3 className="card-title"><Link to={"/PCrear"} className="btn btn-block btn-primary btn-sm">Registrar tienda</Link></h3>
+                        <h3 className="card-title"><Link to={"/PCrear"} className="btn btn-block btn-primary btn-sm">Registrar Tienda</Link></h3>
                             <div className="card-tools">
                         
 
@@ -120,6 +120,8 @@ const ProyectosAdmin = () => {
                                         <th style={{ width: '10%' }}>#</th>
                                         <th style={{ width: '40%' }}>Nombre</th>
                                         <th style={{ width: '35%' }}>Dirección</th>
+                                        <th style={{ width: '35%' }}>Telefono</th>
+                                        <th style={{ width: '35%' }}>Correo</th>
                                         <th style={{ width: '15%' }}>Opciones</th>
                                     </tr>
                                 </thead>
@@ -130,9 +132,11 @@ const ProyectosAdmin = () => {
                                                 <td>{item.id}</td>
                                                 <td>{item.nombre}</td>
                                                 <td>{item.direccion}</td>
+                                                <td>{item.telefono}</td>
+                                                <td>{item.correo}</td>            
                                                 <td>
-                                                    <Link to={`/TAdmin/${item.id}@${item.nombre}@${item.direccion}`} className="btn btn-sm btn-info">Productos</Link> &nbsp;&nbsp;
-                                                    <Link to={`/PEditar/${item.id}@${item.nombre}@${item.direccion}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp;&nbsp;
+                                                    <Link to={`/TAdmin/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`} className="btn btn-sm btn-info">Productos</Link> &nbsp;&nbsp;
+                                                    <Link to={`/PEditar/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp;&nbsp;
                                                     <button onClick={(e) => eliminarTienda(e, item.id)} className="btn btn-sm btn-danger">Borrar</button>
                                                 </td>
                                             </tr>

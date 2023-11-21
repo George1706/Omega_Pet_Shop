@@ -12,10 +12,12 @@ const PCrear = () => {
 
     const [tiendas, setTiendas] = useState({
         nombre:'',
-        direccion:''
+        direccion:'',
+        telefono:'',
+        correo:''
     })
 
-    const {nombre, direccion}=tiendas;
+    const {nombre, direccion, telefono, correo}=tiendas;
 
 
     const onChange=(e)=>{
@@ -32,7 +34,9 @@ const PCrear = () => {
     const crearProyecto = async () =>{
         const data ={
             nombre: tiendas.nombre,
-            direccion:tiendas.direccion
+            direccion:tiendas.direccion,
+            telefono:tiendas.telefono,
+            correo:tiendas.correo
         }
         const response = await APIInvoke.invokePOST('/Tiendas', data);
         const idProyecto = response.id;
@@ -73,7 +77,9 @@ const PCrear = () => {
 
         setTiendas({
             nombre:'',
-            direccion:''
+            direccion:'',
+            telefono:'',
+            correo:''
         })
     }
     }
@@ -110,19 +116,26 @@ const PCrear = () => {
                         <div className="card-body">
                         <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
-                                <div className="form-group">
+                                <div className="form-group"> 
                                         <label htmlFor="nombre">Nombre:</label>
                                         <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre de la tienda" value={nombre} onChange={onChange} required/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="nombre">Dirección:</label>
-                                        <input type="text" className="form-control" id="direccion" name="direccion" placeholder="Ingrese la direcciòn de la tienda" value={direccion} onChange={onChange} required/>
+                                        <input type="text" className="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección de la tienda" value={direccion} onChange={onChange} required/>
                                     </div>
-
+                                    <div className="form-group">
+                                        <label htmlFor="telefono">Telefono:</label>
+                                        <input type="number" className="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono de la tienda" value={telefono} onChange={onChange} required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="correo">Correo:</label>
+                                        <input type="email" className="form-control" id="correo" name="correo" placeholder="Ingrese el correo de la tienda" value={correo} onChange={onChange} required/>
+                                    </div>
                                 </div>
                                 
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Crear</button>
+                                    <button type="submit" className="btn btn-primary">Crear Tienda</button>
                                 </div>
                             </form>
 

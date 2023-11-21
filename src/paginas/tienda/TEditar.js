@@ -21,18 +21,21 @@ const TEditar = () => {
     const precioProducto = arreglo[2]
     const idTienda = arreglo[3]
     const idCategoria= arreglo[4]
-    const nombreTienda= arreglo[5]
+    const descripProd= arreglo[5]
+    const nombreTienda= arreglo[6]
     const tituloPag = `Actualización de productos: ${nombreTienda}`
 
 
     const [productos, setproductos] = useState({
+        id:idProducto,
         nombre: nombreProducto,
         precio:precioProducto,
         idT:idTienda,
-        idC:idCategoria
+        idC:idCategoria,
+        descripcion:descripProd
     })
 
-    const { nombre, precio, idC } = productos;
+    const { nombre, precio, idC, descripcion} = productos;
 
     useEffect(() => {
         document.getElementById("nombre").focus();
@@ -52,10 +55,12 @@ const TEditar = () => {
 
 
         const data = {
+            id:idProducto,
             idT: idTienda,
-            idC:productos.idC,
             nombre: productos.nombre,
             precio:productos.precio,
+            idC:productos.idC,
+            descripcion:productos.descripcion,
             estado: false
         }
 
@@ -101,12 +106,24 @@ const TEditar = () => {
 
         }
     }
-
+    const [categorias, setCategorias] = useState([]); // Agregar estado para almacenar las categorías
     const onSubmit = (e) => {
         e.preventDefault();
         editarTarea()
     }
-
+    useEffect(() => {
+        // Lógica para obtener las categorías de tu API o de donde las tengas almacenadas
+        const obtenerCategorias = async () => {
+            try {
+                const response = await APIInvoke.invokeGET('/categorias'); // Reemplaza '/categorias' por tu endpoint correcto
+                setCategorias(response); // Actualizar el estado con las categorías obtenidas
+            } catch (error) {
+                console.error('Error al obtener las categorías:', error);
+            }
+        };
+    
+        obtenerCategorias(); // Llamar a la función para obtener las categorías al cargar el componente
+    }, []);
     return ( 
         <div className="wrapper">
             <Navbar></Navbar>
@@ -143,10 +160,20 @@ const TEditar = () => {
                                         <input type="text" className="form-control" id="precio" name="precio" placeholder="Ingrese el precio del producto" value={precio} onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="categoria">Categoria:</label>
-                                        <input type="text" className="form-control" id="categoria" name="idC" placeholder="Ingrese el nombre de la categoría" value={idC} onChange={onChange} required />
+                                    <label htmlFor="idC">Categoría:</label>
+                                    <select className="form-control" id="idC" name="idC" value={idC} onChange={onChange} required>
+                                        <option value="">Seleccione una categoría</option>
+                                        {categorias.map((categoria) => (
+                                            <option key={categoria.id} value={categoria.id}>
+                                                {categoria.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
                                     </div>
-
+                                    <div className="form-group">
+                                        <label htmlFor="descripcion">Descripción:</label>
+                                        <input type="text" className="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción del producto" value={descripcion} onChange={onChange} required />
+                                    </div>
                                 </div>
 
                                 <div className="card-footer">

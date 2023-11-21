@@ -19,12 +19,10 @@ const TCrear = () => {
         precio:'',
         idT:'',
         idC:'',
-        telefono:'',
-        correo:'',
-        horariosAtencion:''
+        descripcion:''
     })
 
-    const { nombre, idC , precio, telefono, correo} = productos;
+    const { nombre, precio , idC, descripcion} = productos;
 
 
 
@@ -32,7 +30,7 @@ const TCrear = () => {
     let arreglo = idProyecto.split('@')
     const idTienda = arreglo[0]
     const nombreTienda = arreglo[1]
-    const tituloPag = `Creación de productos: ${nombreTienda}`
+    const tituloPag = `Crear productos en: ${nombreTienda}`
 
 
     useEffect(() => {
@@ -52,18 +50,17 @@ const TCrear = () => {
 
         const data = {
             idT: idTienda,
-            idC:productos.idC,
             nombre: productos.nombre,
             precio:productos.precio,
-            telefono:productos.telefono,
-            correo:productos.correo
+            idC:productos.idC,
+            descripcion:productos.descripcion
         }
 
         const response = await APIInvoke.invokePOST('/productos', data);
         const idTarea = response.id;
 
         if (idTarea === '') {
-            const msg = "La tarea no fue creada correctamente";
+            const msg = "El producto no fue creado correctamente";
             new swal({
                 title: 'Error',
                 text: msg,
@@ -80,7 +77,7 @@ const TCrear = () => {
             });
         } else {
             navigate(`/TAdmin/${idTienda}@${nombreTienda}`)
-            const msg = "La tarea fue creada correctamente";
+            const msg = "El producto fue creado correctamente";
             new swal({
                 title: 'Información',
                 text: msg,
@@ -163,17 +160,12 @@ const TCrear = () => {
                                     </select>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="telefono">Telefono:</label>
-                                        <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" value={telefono} onChange={onChange} required />
+                                        <label htmlFor="descripcion">Descripción:</label>
+                                        <input type="text" className="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción del producto" value={descripcion} onChange={onChange} required />
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="correo">Correo:</label>
-                                        <input type="text" className="form-control" id="correo" name="correo" placeholder="Ingrese el correo" value={correo} onChange={onChange} required />
-                                    </div>
-                                </div>
-
+                            </div>
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">crear</button>
+                                    <button type="submit" className="btn btn-primary">Crear Producto</button>
                                 </div>
                             </form>
 

@@ -17,14 +17,22 @@ const PEditar = () => {
 
     const nombreTienda = arreglo[1];
     const direccionTienda = arreglo[2];
+    const telefonoTienda = arreglo[3];
+    const correoTienda = arreglo[4];
 
     const [tienda, setTienda] = useState({
         nombre: nombreTienda,
-        direccion: direccionTienda
+        direccion: direccionTienda,
+        telefono: telefonoTienda,
+        correo: correoTienda
     });
 
-    const {nombre, direccion}=tienda;
+    
+    const {nombre, direccion, telefono, correo}=tienda;
 
+    useEffect(() => {
+        document.getElementById("nombre").focus();
+    }, [])
 
     const onChange=(e)=>{
         setTienda({
@@ -38,8 +46,12 @@ const PEditar = () => {
         const idT = arreglo[0];
 
         const data = {
+            id: idT,
             nombre: tienda.nombre,
-            direccion:tienda.direccion
+            direccion:tienda.direccion,
+            telefono:tienda.telefono,
+            correo:tienda.correo,
+            estado:false
         }
 
         const response = await APIInvoke.invokePUT(`/Tiendas/${idT}`, data);
@@ -81,11 +93,7 @@ const PEditar = () => {
             });
         }
     }
-
-    useEffect(() => {
-        document.getElementById("nombre").focus();
-    }, []);
-
+    
     const onSubmit =(e)=>{
         e.preventDefault();
         editarTiendas();
@@ -124,14 +132,21 @@ const PEditar = () => {
                                 <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre de la tienda" value={nombre} onChange={onChange} required/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="nombre">Dirección:</label>
+                                <label htmlFor="direccion">Dirección:</label>
                                 <input type="text" className="form-control" id="direccion" name="direccion" placeholder="Ingrese la direcciòn de la tienda" value={direccion} onChange={onChange} required/>
                             </div>
-
+                            <div className="form-group">
+                                <label htmlFor="telefono">Telefono:</label>
+                                <input type="number" className="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono de la tienda" value={telefono} onChange={onChange} required/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="correo">Correo:</label>
+                                <input type="email" className="form-control" id="correo" name="correo" placeholder="Ingrese el correo de la tienda" value={correo} onChange={onChange} required/>
+                            </div>
                         </div>
                         
                         <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">Actualizar</button>
+                            <button type="submit" className="btn btn-primary">Actualizar Tienda</button>
                         </div>
                     </form>
 

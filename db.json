@@ -49,14 +49,27 @@
   ],
   "Tiendas": [
     {
+      "id": 1,
       "nombre": "CatsAndDogs",
-      "direccion": "calle34 B # 32 - A 32",
-      "id": 1
+      "direccion": "calle34 Bis 67",
+      "telefono": "3225678907",
+      "correo": "huellas",
+      "estado": false
     },
     {
       "nombre": "Perricatss",
       "direccion": "diagonal 69 sur",
+      "telefono": "3124018772",
+      "correo": "jorge.pineda820@educacionbogota.edu.co",
       "id": 2
+    },
+    {
+      "id": 3,
+      "nombre": "Cebolla",
+      "direccion": "calle34 Bis 69",
+      "telefono": "3225678908",
+      "correo": "jorge.pineda820",
+      "estado": false
     }
   ],
   "Ventas": [
@@ -87,18 +100,48 @@
   ],
   "Productos": [
     {
+      "id": 1,
       "idT": "1",
-      "idC": "Comida",
       "nombre": "Dogumert Comida",
       "precio": "500000",
-      "id": 1
+      "idC": "1",
+      "descripcion": "rico",
+      "estado": false
+    },
+    {
+      "id": 2,
+      "idT": "1",
+      "nombre": "Cama Perro",
+      "precio": "10000",
+      "idC": "2",
+      "descripcion": "grande",
+      "estado": false
+    },
+    {
+      "id": 4,
+      "idT": "1",
+      "nombre": "Cama Perro",
+      "precio": "500000",
+      "idC": "2",
+      "descripcion": "Cama pequeña",
+      "estado": false
+    },
+    {
+      "id": 5,
+      "idT": "1",
+      "nombre": "Dogumert Comida",
+      "precio": "10000",
+      "idC": "1",
+      "descripcion": "Bolsa grande",
+      "estado": false
     },
     {
       "idT": "1",
-      "idC": "Accesorios",
-      "nombre": "Cama Perro",
-      "precio": "10000",
-      "id": 2
+      "nombre": "corbata perro",
+      "precio": "500000",
+      "idC": "1",
+      "descripcion": "Amarillo",
+      "id": 6
     }
   ]
 }
