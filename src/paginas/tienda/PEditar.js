@@ -51,7 +51,6 @@ const PEditar = () => {
             direccion:tienda.direccion,
             telefono:tienda.telefono,
             correo:tienda.correo,
-            estado:false
         }
 
         const response = await APIInvoke.invokePUT(`/Tiendas/${idT}`, data);

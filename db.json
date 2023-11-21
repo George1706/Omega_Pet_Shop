@@ -35,6 +35,15 @@
       "password": "Jean123",
       "rol": "administrador",
       "id": 4
+    },
+    {
+      "nombre": "George",
+      "email": "george@omepet.com",
+      "nit": "",
+      "telefono": "3214781761",
+      "password": "George123456",
+      "rol": "administrador",
+      "id": 5
     }
   ],
   "Categorias": [
@@ -70,6 +79,13 @@
       "telefono": "3225678908",
       "correo": "jorge.pineda820",
       "estado": false
+    },
+    {
+      "id": 4,
+      "nombre": "Fun Animals",
+      "direccion": "carrera 8 bis 67",
+      "telefono": "3245678902",
+      "correo": "funaAnimals"
     }
   ],
   "Ventas": [
