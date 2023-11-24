@@ -11,6 +11,28 @@ const VerProductosPropios = () => {
 
 
     const [productos, setProductos] = useState([]);
+    const [categorias, setCategorias] = useState({});
+
+    const cargarCategorias = async () => {
+        try {
+            const response = await APIInvoke.invokeGET(`/categorias`);
+            if (Array.isArray(response) && response.length > 0) {
+                // Mapear categorías para tener un objeto con el formato ID -> Nombre
+                const categoriasMap = response.reduce((acc, cat) => {
+                    acc[cat.id] = cat.nombre;
+                    return acc;
+                }, {});
+                setCategorias(categoriasMap);
+            }
+        } catch (error) {
+            console.error('Error al cargar las categorías:', error);
+        }
+    };
+
+    useEffect(() => {
+        cargarProductos();
+        cargarCategorias();
+    }, []);
 
     const { idProyecto } = useParams();
     let arreglo = idProyecto.split('@')
@@ -54,6 +76,7 @@ const VerProductosPropios = () => {
             }
             
         };
+    
 
         const productoExistente = await verificarExistenciaTarea(idProducto);
 
@@ -137,7 +160,7 @@ const VerProductosPropios = () => {
                                                 <td>{item.nombre}</td>
                                                 <td>{item.precio}</td>
                                                 <td>{nombreTienda}</td>
-                                                <td>{item.idC}</td>
+                                                <td>{categorias[item.idC]}</td>
                                             </tr>
                                         )}
                                 </tbody>

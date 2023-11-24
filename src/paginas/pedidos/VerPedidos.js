@@ -13,7 +13,7 @@ const VerPedidos = () => {
 
     const cargarPedidos = async () => {
         try {
-            var response = await APIInvoke.invokeGET(`/ventas`);
+            const response = await APIInvoke.invokeGET(`/ventas`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
@@ -26,8 +26,39 @@ const VerPedidos = () => {
         }
     };
 
+    const obtenerProductoCategoria = async (venta) => {
+        try {
+            // Obtener el producto
+            const producto = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
+            // Obtener la categoría
+            const categoria = await APIInvoke.invokeGET(`/categorias/${producto.idC}`);
+
+            // Almacenar en ventas con información adicional
+            setVentas(prevVentas => [
+                ...prevVentas,
+                {
+                    ...venta,
+                    nombreProducto: producto.nombre,
+                    nombreCategoria: categoria.nombre
+                }
+            ]);
+        } catch (error) {
+            console.error('Error al obtener producto/categoría:', error);
+        }
+    };
+    
     useEffect(() => {
+        const obtenerDetallesPedidos = async () => {
+            try {
+                // Para cada venta, obtener detalles de producto y categoría
+                await Promise.all(ventas.map(obtenerProductoCategoria));
+            } catch (error) {
+                console.error('Error al obtener detalles de pedidos:', error);
+            }
+        };
+
         cargarPedidos();
+        obtenerDetallesPedidos();
     }, []);
 
     return ( 
@@ -56,36 +87,36 @@ const VerPedidos = () => {
                         </div>
                     </div>
                     <div className="card-body">
-                        <table className="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style={{ width: '10%' }}>#</th>
-                                    <th style={{ width: '10%' }}># Producto</th>
-                                    <th style={{ width: '10%' }}>Nombre Producto</th>
-                                    <th style={{ width: '10%' }}>Nombre cliente</th>
-                                    <th style={{ width: '10%' }}>Direccion</th>
-                                    <th style={{ width: '10%' }}>Telefono</th>
-                                    <th style={{ width: '10%' }}>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    ventas.map(item =>
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.idP}</td>
-                                            <td>{item.nombreProd}</td>
-                                            <td>{item.nombre}</td>
-                                            <td>{item.direccion}</td>
-                                            <td>{item.telefono}</td>
-                                            <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProd}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary">Editar</Link></td>
-                                        </tr>
-                                    )}
-                            </tbody>
-
-
-                        </table>
-                    </div>
+                    <table className="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style={{ width: '10%' }}>#</th>
+                                <th style={{ width: '10%' }}># Producto</th>
+                                <th style={{ width: '15%' }}>Nombre Producto</th>
+                                <th style={{ width: '15%' }}>Categoría</th>
+                                <th style={{ width: '10%' }}>Nombre cliente</th>
+                                <th style={{ width: '10%' }}>Dirección</th>
+                                <th style={{ width: '10%' }}>Teléfono</th>
+                                <th style={{ width: '10%' }}>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                ventas.map(item =>
+                                    <tr key={item.id}>
+                                        <td>{item.id}</td>
+                                        <td>{item.idP}</td>
+                                        <td>{item.nombreProducto}</td>
+                                        <td>{item.nombreCategoria}</td>
+                                        <td>{item.nombre}</td>
+                                        <td>{item.direccion}</td>
+                                        <td>{item.telefono}</td>
+                                        <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProducto}@${item.nombreCategoria}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary">Editar</Link></td>
+                                    </tr>
+                                )}
+                        </tbody>
+                    </table>
+                </div>
                 </div>
 
             </section>

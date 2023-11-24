@@ -67,3 +67,14 @@
   .animar-tienda {
     animation: agregarTienda 1s ease infinite; /* Aquí se define la animación */
   }
+
+  .sidebar-dark-custom {
+    background: linear-gradient(to bottom, #000000, #808080);
+    /* Otros estilos personalizados que desees aplicar */
+}
+
+
+.menua-background {
+  background-image: url('../img/fondoMA.jpg'); /* Ruta a tu imagen de fondo */
+  background-repeat: no-repeat;
+}

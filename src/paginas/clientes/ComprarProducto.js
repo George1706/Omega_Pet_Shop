@@ -21,6 +21,7 @@ const idProducto= arreglo[0]
 const nombreProducto = arreglo[1]
 const idTienda = arreglo[2]
 const nombreTienda = arreglo[3]
+const categoriaTienda = arreglo[4]
 
 const tituloPag = `Compra tus productos`
 
@@ -30,10 +31,30 @@ const [venta, setVentas] = useState({
     nombreProd:nombreProducto,
     nombre:'',
     direccion:'',
-    telefono:''
+    telefono:'',
+    categori:''
 })
 
-const { nombre, direccion, telefono } = venta;
+const { nombre, direccion, telefono,categoria} = venta;
+
+const [categoriasTienda, setCategoriasTienda] = useState([]);
+
+useEffect(() => {
+    // Llamar a la API para obtener las categorías de la tienda
+    const fetchCategorias = async () => {
+        try {
+            const response = await APIInvoke.invokeGET(`/Tiendas/${idTienda}/categorias`);
+            // Actualizar el estado con las categorías obtenidas
+            if (response && response.length > 0) {
+                setCategoriasTienda(response);
+            }
+        } catch (error) {
+            console.error('Error al obtener las categorías', error);
+        }
+    };
+
+    fetchCategorias();
+}, [idTienda]);
 
 useEffect(() => {
     document.getElementById("nombre").focus();
@@ -55,7 +76,8 @@ const realizarVenta = async () => {
         nombreProd:nombreProducto,
         nombre:venta.nombre,
         direccion:venta.direccion,
-        telefono:venta.telefono
+        telefono:venta.telefono,
+        categoria:venta.categoria
     }
 
     console.log(data)
@@ -110,6 +132,24 @@ const onSubmit = (e) => {
     e.preventDefault();
     realizarVenta()
 }
+ const [productosTienda, setProductosTienda] = useState([]);
+
+    useEffect(() => {
+        // Llamar a la API para obtener los productos de la tienda
+        const fetchProductos = async () => {
+            try {
+                const response = await APIInvoke.invokeGET(`/tiendas/${idTienda}/productos`);
+                if (Array.isArray(response) && response.length > 0) {
+                    setProductosTienda(response);
+                }
+            } catch (error) {
+                console.error('Error al obtener los productos', error);
+            }
+        };
+
+        fetchProductos();
+    }, [idTienda]);
+
     return ( 
         <div className="wrapper">
             <Navbar></Navbar>
@@ -138,7 +178,7 @@ const onSubmit = (e) => {
                             <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
                                 <div className="form-group">
-                                        <label htmlFor="nombre">Nombre:</label>
+                                        <label htmlFor="nombre">Nombre Cliente:</label>
                                         <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value={nombre} onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
@@ -149,7 +189,44 @@ const onSubmit = (e) => {
                                         <label htmlFor="categoria">Teléfono:</label>
                                         <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese su número de telefónico" value={telefono} onChange={onChange} required />
                                     </div>
-
+                                      <div className="form-group">
+                                    <label htmlFor="producto">Producto:</label>
+                                    <select
+                                        className="form-control"
+                                        id="producto"
+                                        name="idP"
+                                        value={idProducto}
+                                        onChange={onChange}
+                                        required
+                                    >
+                                        <option value="">Seleccione un producto</option>
+                                        {/* Mapear los productos disponibles */}
+                                        {productosTienda.map((producto) => (
+                                            <option key={producto.id} value={producto.id}>
+                                                {producto.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                    <div className="form-group">
+                                <label htmlFor="categoria">Categoría:</label>
+                                <select
+                                    className="form-control"
+                                    id="categoria"
+                                    name="categoria"
+                                    value={categoria}
+                                    onChange={onChange}
+                                    required
+                                >
+                                    <option value="">Seleccione una categoría</option>
+                                    {/* Mapear las categorías disponibles */}
+                                    {categoriasTienda.map((cat) => (
+                                        <option key={cat.id} value={cat.id}>
+                                            {cat.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                                 </div>
 
                                 <div className="card-footer">

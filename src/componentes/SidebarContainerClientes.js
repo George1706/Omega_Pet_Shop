@@ -5,7 +5,7 @@ import MenuClientes from "./HomeClientes";
 
 const SidebarContainerClientes = () => {
     return ( 
-        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        <aside className="main-sidebar sidebar-dark-custom elevation-4">
         <Link to={"/menuClientes"} className="brand-link">
             <img
                 src={Logo}
@@ -13,7 +13,7 @@ const SidebarContainerClientes = () => {
                 className="brand-image img-circle elevation-3"
                 style={{ opacity: ".8" }}
             />
-            <span className="brand-text font-weight-light">OmegaPetShop</span>
+            <span className="brand-text font-weight-light">CLIENTE</span>
         </Link>
         <div className="sidebar">
             <div className="user-panel mt-3 pb-3 mb-3 d-flex">

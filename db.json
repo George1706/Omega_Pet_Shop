@@ -26,40 +26,6 @@
       "password": "Jorge123",
       "rol": "cliente",
       "id": 3
-    },
-    {
-      "nombre": "jean",
-      "email": "jeanCarlo@gmail.com",
-      "nit": "",
-      "telefono": "3245678903",
-      "password": "Jean123",
-      "rol": "administrador",
-      "id": 4
-    },
-    {
-      "nombre": "George",
-      "email": "george@omepet.com",
-      "nit": "",
-      "telefono": "3214781761",
-      "password": "George123456",
-      "rol": "administrador",
-      "id": 5
-    },
-    {
-      "nombre": "heyner",
-      "email": "heynerybaquero2012@hotmail.com",
-      "telefono": "3143209825",
-      "password": "matiasyaxel",
-      "rol": "administrador",
-      "id": 6
-    },
-    {
-      "nombre": "heyner",
-      "email": "heynerybaquero2012@hotmail.com",
-      "telefono": "3143209825",
-      "password": "matiasyaxel",
-      "rol": "administrador",
-      "id": 7
     }
   ],
   "Categorias": [
@@ -87,21 +53,6 @@
       "telefono": "3124018772",
       "correo": "jorge.pineda820@educacionbogota.edu.co",
       "id": 2
-    },
-    {
-      "id": 3,
-      "nombre": "Cebolla",
-      "direccion": "calle34 Bis 69",
-      "telefono": "3225678908",
-      "correo": "jorge.pineda820",
-      "estado": false
-    },
-    {
-      "id": 4,
-      "nombre": "Fun Animals",
-      "direccion": "carrera 8 bis 67",
-      "telefono": "3245678902",
-      "correo": "funaAnimals"
     }
   ],
   "Ventas": [
@@ -128,6 +79,42 @@
       "direccion": "carrera 45 67 68",
       "telefono": "3234567890",
       "id": 3
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Jorge",
+      "direccion": "calle34 B # 32 - A 78",
+      "telefono": "3124018772",
+      "categoria": "1",
+      "id": 4
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Jorge Jaird",
+      "direccion": "carrera 93 B # 130 A 56",
+      "telefono": "3225678907",
+      "categoria": "1",
+      "id": 5
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Maria",
+      "direccion": "carrera 93 B # 130 A 56",
+      "telefono": "3225678907",
+      "categoria": "2",
+      "id": 6
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Sara",
+      "direccion": "calle34 Bis 67",
+      "telefono": "3225678907",
+      "categoria": "2",
+      "id": 7
     }
   ],
   "Productos": [
@@ -148,49 +135,6 @@
       "idC": "2",
       "descripcion": "grande",
       "estado": false
-    },
-    {
-      "id": 4,
-      "idT": "1",
-      "nombre": "Cama Perro",
-      "precio": "500000",
-      "idC": "2",
-      "descripcion": "Cama pequeña",
-      "estado": false
-    },
-    {
-      "id": 5,
-      "idT": "1",
-      "nombre": "Dogumert Comida",
-      "precio": "10000",
-      "idC": "1",
-      "descripcion": "Bolsa grande",
-      "estado": false
-    },
-    {
-      "idT": "1",
-      "nombre": "corbata perro",
-      "precio": "500000",
-      "idC": "1",
-      "descripcion": "Amarillo",
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "idT": "1",
-      "nombre": "Cebolla",
-      "precio": "135000",
-      "idC": "1",
-      "descripcion": "Bolsa grande",
-      "id": 9
-    },
-    {
-      "id": 10
     }
   ]
 }

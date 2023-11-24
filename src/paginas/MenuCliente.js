@@ -5,7 +5,7 @@ import Navbar from "../componentes/Navbar";
 
 import Footer from "../componentes/Footer";
 import SidebarContainerClientes from "../componentes/SidebarContainerClientes";
-
+import "../css/menu.css"
 const MenuClientes = () => {
     return (
     <div className="wrapper">
@@ -22,13 +22,13 @@ const MenuClientes = () => {
             <div className="container-fluid">
             <div className="row">
                 <div className="col-lg-7 col-8">
-                <div className="small-box bg-pink">
+                <div className="small-box bg-rosado-oscuro">
                     <div className="inner">
                     <h3>Tiendas</h3>
                     <p>&nbsp;</p>
                     </div>
                     <div className="icon">
-                    <i className="fas fa-shopping-bag"></i>
+                    <i className="fas fa-shopping-bag animar-tienda"></i>
                     </div>
                     <Link to="/VerTiendas" className="small-box-footer">
                     Ver Tiendas <i className="fas fa-arrow-circle-right"></i>

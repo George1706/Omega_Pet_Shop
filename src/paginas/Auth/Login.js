@@ -160,7 +160,7 @@ const Login = () => {
         </button>
         <br></br>
         <p className="login-box-msg">¿No tiene una cuenta? <Link to={'/crearCuenta'}><i />  Crea una</Link></p>
-        <p className="login-box-msg">Crea una cuenta como administrador<Link to={'/CrearCuentaAdministrador'}><i /> Aquí</Link></p>
+        <p className="login-box-msg">Crea una cuenta para tu organización<Link to={'/CrearCuentaAdministrador'}><i /> Aquí</Link></p>
                 </div>
             </form> 
             </div>

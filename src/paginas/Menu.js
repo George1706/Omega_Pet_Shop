@@ -15,7 +15,7 @@ const Menu = () => {
           titulo={"Panel de Administrador"}
           breadCrumb1={"Inicio"}
           breadCrumb2={"Panel de Administrador"}
-          ruta1={"/Menu"}
+          ruta1={"/Menu"} 
         />
         <section className="content">
           <div className="container-fluid">
