@@ -24,7 +24,10 @@ const nombreTienda = arreglo[3]
 const categoriaTienda = arreglo[4]
 
 const tituloPag = `Compra tus productos`
-
+const [selectedProduct, setSelectedProduct] = useState('');
+const onProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
 
 const [venta, setVentas] = useState({
     idP: idProducto,
@@ -182,32 +185,44 @@ const onSubmit = (e) => {
                                         <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value={nombre} onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="tienda">Dirección:</label>
-                                        <input type="text" className="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección" value={direccion} onChange={onChange} required />
+                                    <label htmlFor="direccion">Dirección:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="direccion"
+                                        name="direccion"
+                                        placeholder="Ingrese la dirección"
+                                        value={direccion}
+                                        onChange={onChange}
+                                        pattern="[A-Za-z0-9# -]+"
+                                        title="Ingrese una dirección válida (puede contener letras, números, # y -)"
+                                        required
+                                    />
                                     </div>
+
                                     <div className="form-group">
                                         <label htmlFor="categoria">Teléfono:</label>
                                         <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese su número de telefónico" value={telefono} onChange={onChange} required />
                                     </div>
-                                      <div className="form-group">
-                                    <label htmlFor="producto">Producto:</label>
-                                    <select
+                                    <div className="form-group">
+                                      <label htmlFor="producto">Producto:</label>
+                                      <select
                                         className="form-control"
                                         id="producto"
                                         name="idP"
-                                        value={idProducto}
-                                        onChange={onChange}
+                                        value={selectedProduct} // Usar el estado para el valor del select
+                                        onChange={onProductChange} // Manejar cambios en la selección
                                         required
-                                    >
+                                      >
                                         <option value="">Seleccione un producto</option>
                                         {/* Mapear los productos disponibles */}
                                         {productosTienda.map((producto) => (
-                                            <option key={producto.id} value={producto.id}>
-                                                {producto.nombre}
-                                            </option>
+                                          <option key={producto.id} value={producto.id}>
+                                            {producto.nombre}
+                                          </option>
                                         ))}
-                                    </select>
-                                </div>
+                                      </select>
+                                    </div>
                                     <div className="form-group">
                                 <label htmlFor="categoria">Categoría:</label>
                                 <select

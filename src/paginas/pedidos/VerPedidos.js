@@ -17,7 +17,21 @@ const VerPedidos = () => {
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
-                setVentas(response);
+                // Actualizar los detalles de producto y categoría antes de actualizar el estado
+                const ventasConDetalles = await Promise.all(
+                    response.map(async (venta) => {
+                        const productos = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
+                        const categoria = await APIInvoke.invokeGET(`/categorias/${productos.idC}`);
+                        
+                        return {
+                            ...venta,
+                            nombreProducto: productos.nombre,
+                            nombreCategoria: categoria.nombre
+                        };
+                    })
+                );
+                // Actualizar el estado con los detalles de producto y categoría
+                setVentas(ventasConDetalles);
             } else {
                 console.error('La respuesta de la API no contiene proyectos.');
             }
@@ -26,19 +40,24 @@ const VerPedidos = () => {
         }
     };
 
+    useEffect(() => {
+        cargarPedidos();
+    }, []);
+
+
     const obtenerProductoCategoria = async (venta) => {
         try {
             // Obtener el producto
-            const producto = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
+            const productos = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
             // Obtener la categoría
-            const categoria = await APIInvoke.invokeGET(`/categorias/${producto.idC}`);
+            const categoria = await APIInvoke.invokeGET(`/categorias/${productos.idC}`);
 
             // Almacenar en ventas con información adicional
             setVentas(prevVentas => [
                 ...prevVentas,
                 {
                     ...venta,
-                    nombreProducto: producto.nombre,
+                    nombreProducto: productos.nombre,
                     nombreCategoria: categoria.nombre
                 }
             ]);
@@ -88,34 +107,32 @@ const VerPedidos = () => {
                     </div>
                     <div className="card-body">
                     <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th style={{ width: '10%' }}>#</th>
-                                <th style={{ width: '10%' }}># Producto</th>
-                                <th style={{ width: '15%' }}>Nombre Producto</th>
-                                <th style={{ width: '15%' }}>Categoría</th>
-                                <th style={{ width: '10%' }}>Nombre cliente</th>
-                                <th style={{ width: '10%' }}>Dirección</th>
-                                <th style={{ width: '10%' }}>Teléfono</th>
-                                <th style={{ width: '10%' }}>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                ventas.map(item =>
-                                    <tr key={item.id}>
-                                        <td>{item.id}</td>
-                                        <td>{item.idP}</td>
-                                        <td>{item.nombreProducto}</td>
-                                        <td>{item.nombreCategoria}</td>
-                                        <td>{item.nombre}</td>
-                                        <td>{item.direccion}</td>
-                                        <td>{item.telefono}</td>
-                                        <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProducto}@${item.nombreCategoria}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary">Editar</Link></td>
-                                    </tr>
-                                )}
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    {/* Eliminar las columnas # y # Producto */}
+                                    <th style={{ width: '15%' }}>Nombre Producto</th>
+                                    <th style={{ width: '15%' }}>Categoría</th>
+                                    <th style={{ width: '10%' }}>Nombre cliente</th>
+                                    <th style={{ width: '10%' }}>Dirección</th>
+                                    <th style={{ width: '10%' }}>Teléfono</th>
+                                    <th style={{ width: '10%' }}>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    ventas.map(item =>
+                                        <tr key={item.id}>
+                                            {/* Eliminar las celdas correspondientes */}
+                                            <td>{item.nombreProducto}</td>
+                                            <td>{item.nombreCategoria}</td>
+                                            <td>{item.nombre}</td>
+                                            <td>{item.direccion}</td>
+                                            <td>{item.telefono}</td>
+                                            <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProducto}@${item.nombreCategoria}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary">Editar</Link></td>
+                                        </tr>
+                                    )}
+                            </tbody>
+                        </table>
                 </div>
                 </div>
 

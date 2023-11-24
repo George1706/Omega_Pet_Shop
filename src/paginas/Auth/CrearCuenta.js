@@ -161,7 +161,7 @@ const CrearCuenta = () => {
         </div>
        
             <div className="card-body login-card-body">
-            <p className="login-box-msg">Ingrese los datos del usuario.</p>
+            <p className="login-box-msg">Ingrese los datos del cliente</p>
             <form onSubmit={onSubmit}>
                 <div className="input-group mb-3">
                 <input

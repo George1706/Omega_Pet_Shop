@@ -11,102 +11,130 @@ import swal from "sweetalert2";
 const EditarPedidos = () => {
 
     const navigate = useNavigate();
+    const [productos, setProductos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+
+    // Función para obtener productos desde la API
+    const obtenerProductos = async () => {
+        try {
+            const response = await APIInvoke.invokeGET('/productos');
+            setProductos(response); // Actualizar el estado con los productos obtenidos
+        } catch (error) {
+            console.error('Error al obtener productos:', error);
+        }
+    };
+
+    // Función para obtener categorías desde la API
+    const obtenerCategorias = async () => {
+        try {
+            const response = await APIInvoke.invokeGET('/categorias');
+            setCategorias(response); // Actualizar el estado con las categorías obtenidas
+        } catch (error) {
+            console.error('Error al obtener categorías:', error);
+        }
+    };
+
+    useEffect(() => {
+        obtenerProductos();
+        obtenerCategorias();
+    }, []);
 
     const { idPedido } = useParams();
     let arreglo = idPedido.split('@')
     const idPe= arreglo[0]
     const idProducto = arreglo[1]
     const nombreProducto = arreglo[2]
-    const nombreCliente = arreglo[3]
-    const direccionP= arreglo[4]
-    const telefonoP= arreglo[5]
+    const categoria= arreglo[3]
+    const nombreCliente = arreglo[4]
+    const direccionP= arreglo[5]
+    const telefonoP= arreglo[6]
+
 
     const tituloPag = `Edición de pedidos No: ${idPe}`
 
 
     const [pedidos, setPedidos] = useState({
         idP: idProducto,
-        nombreProd:nombreProducto,
-        nombre:nombreCliente,
-        direccion:direccionP,
-        telefono:telefonoP
-    })
+        nombreProd: nombreProducto,
+        categoriap: categoria,
+        nombre: nombreCliente,
+        direccion: direccionP,
+        telefono: telefonoP,
+    });
 
-    const { nombre, direccion, telefono } = pedidos;
+    const { nombreProd, categoriap, nombre, direccion, telefono } = pedidos;
 
     useEffect(() => {
         document.getElementById("nombre").focus();
-    }, [])
-
+    }, []);
     const onChange = (e) => {
+        const { name, value } = e.target;
         setPedidos({
             ...pedidos,
-            [e.target.name]: e.target.value
-        })
+            [name]: value,
+        });
+    };
 
-    }
+
     const editarPedido = async () => {
-        let arreglo = idPedido.split('@')
-        const idPe= arreglo[0]
+        try {
+            const data = {
+                idP: idProducto,
+                nombreProd: nombreProducto,
+                categoriap: categoria,
+                nombre: pedidos.nombre,
+                direccion: pedidos.direccion,
+                telefono: pedidos.telefono,
+            };
 
+            console.log(data);
+            const response = await APIInvoke.invokePUT(`/Ventas/${idPe}`, data);
+            const idPedidoEditado = response.id;
 
-
-        const data = {
-            idP: idProducto,
-            nombreProd:nombreProducto,
-            nombre:pedidos.nombre,
-            direccion:pedidos.direccion,
-            telefono:pedidos.telefono
+            if (idPedidoEditado !== idPe) {
+                navigate(`/VerPedidos`);
+                const msg = "El pedido fue editado correctamente";
+                new swal({
+                    title: 'Información',
+                    text: msg,
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-primary',
+                            closeModal: true,
+                        },
+                    },
+                });
+            } else {
+                const msg = "El pedido no fue editado correctamente";
+                new swal({
+                    title: 'Error',
+                    text: msg,
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true,
+                        },
+                    },
+                });
+            }
+        } catch (error) {
+            console.error('Error al editar el pedido:', error);
+            // Puedes manejar el error mostrando un mensaje al usuario o realizando alguna otra acción
         }
-
-        console.log(data)
-        const response = await APIInvoke.invokePUT(`/Ventas/${idPe}`, data);
-        const idPedidoEditado = response.id;
-
-        if (idPedidoEditado !== idPe) {
-            navigate(`/ProyectosAdmin`)
-            const msg = "El pedido fue editado correctamente";
-            new swal({
-                title: 'Información',
-                text: msg,
-                icon: 'success',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-primary',
-                        closeModal: true
-                    }
-                }
-            });
-
-        } else {
-
-            const msg = "El pedido no fue editado correctamente";
-            new swal({
-                title: 'Error',
-                text: msg,
-                icon: 'error',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-danger',
-                        closeModal: true
-                    }
-                }
-            });
-
-        }
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        editarPedido()
-    }
-
+        editarPedido();
+    };
     return ( 
         <div className="wrapper">
             <Navbar></Navbar>
@@ -134,17 +162,74 @@ const EditarPedidos = () => {
                         <div className="card-body">
                             <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
+                                <div className="form-group">
+                            <label htmlFor="producto">Producto:</label>
+                            <select
+                                className="form-control"
+                                id="producto"
+                                name="nombreProd"
+                                value={nombreProd}
+                                onChange={onChange}
+                                required
+                            >
+                                <option value="">Seleccione un producto</option>
+                                {productos.map((producto) => (
+                                    <option key={producto.id} value={producto.id}>
+                                        {producto.nombre}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="categoria">Categoría:</label>
+                            <select
+                                className="form-control"
+                                id="categoria"
+                                name="categoriap"
+                                value={categoriap}
+                                onChange={onChange}
+                                required
+                            >
+                                <option value="">Seleccione una categoría</option>
+                                {categorias.map((categoria) => (
+                                    <option key={categoria.id} value={categoria.id}>
+                                        {categoria.nombre}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                                     <div className="form-group">
                                         <label htmlFor="categoria">Nombre cliente:</label>
-                                        <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del cliente" value={nombre} onChange={onChange} required />
+                                        <input type="text" 
+                                        className="form-control" 
+                                        id="nombre" 
+                                        name="nombre" 
+                                        placeholder="Ingrese el nombre del cliente" 
+                                        value={nombre} 
+                                        onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="categoria">Direccion:</label>
-                                        <input type="text" className="form-control" id="direccion" name="direccion" placeholder="Ingrese la direccion" value={direccion} onChange={onChange} required />
+                                        <label htmlFor="direccion">Dirección:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="direccion"
+                                            name="direccion"
+                                            placeholder="Ingrese la dirección"
+                                            value={direccion}
+                                            onChange={onChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="categoria">Telefono:</label>
-                                        <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" value={telefono} onChange={onChange} required />
+                                        <input type="text" 
+                                        className="form-control" 
+                                        id="telefono" 
+                                        name="telefono" 
+                                        placeholder="Ingrese el telefono" 
+                                        value={telefono} 
+                                        onChange={onChange} required />
                                     </div>
 
                                 </div>

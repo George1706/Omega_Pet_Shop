@@ -58,18 +58,20 @@
   "Ventas": [
     {
       "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Dogumert Comida",
-      "direccion": "calle34 B # 32 - A 78",
-      "telefono": "3124018772",
+      "nombreProd": "Dogumert Comida",
+      "categoriap": "Comida",
+      "nombre": "Bibi",
+      "direccion": "calle34 B ",
+      "telefono": "undefined",
       "id": 1
     },
     {
       "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Jorge",
-      "direccion": "carrera 93 B # 130 A 56",
-      "telefono": "3124018772",
+      "nombreProd": "Dogumert Comida",
+      "categoriap": "Comida",
+      "nombre": "Jorge fdsdwr",
+      "direccion": "carrera 93 B weweew",
+      "telefono": "454453434",
       "id": 2
     },
     {
@@ -115,6 +117,33 @@
       "telefono": "3225678907",
       "categoria": "2",
       "id": 7
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Jorge",
+      "direccion": "calle 67 - 78",
+      "telefono": "3214781761",
+      "categoria": "1",
+      "id": 8
+    },
+    {
+      "idP": "1",
+      "nombreProd": "CatsAndDogs",
+      "nombre": "Jaird",
+      "direccion": "carrera 93 B # 130 A - 54",
+      "telefono": "3214781761",
+      "categoria": "1",
+      "id": 9
+    },
+    {
+      "idP": "1",
+      "nombreProd": "Dogumert Comida",
+      "categoriap": "Comida",
+      "nombre": "Jaird",
+      "direccion": "carrera 93 B ",
+      "telefono": "23232323",
+      "id": 10
     }
   ],
   "Productos": [
