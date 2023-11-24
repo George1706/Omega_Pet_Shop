@@ -44,6 +44,22 @@
       "password": "George123456",
       "rol": "administrador",
       "id": 5
+    },
+    {
+      "nombre": "heyner",
+      "email": "heynerybaquero2012@hotmail.com",
+      "telefono": "3143209825",
+      "password": "matiasyaxel",
+      "rol": "administrador",
+      "id": 6
+    },
+    {
+      "nombre": "heyner",
+      "email": "heynerybaquero2012@hotmail.com",
+      "telefono": "3143209825",
+      "password": "matiasyaxel",
+      "rol": "administrador",
+      "id": 7
     }
   ],
   "Categorias": [
@@ -158,6 +174,23 @@
       "idC": "1",
       "descripcion": "Amarillo",
       "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "idT": "1",
+      "nombre": "Cebolla",
+      "precio": "135000",
+      "idC": "1",
+      "descripcion": "Bolsa grande",
+      "id": 9
+    },
+    {
+      "id": 10
     }
   ]
 }

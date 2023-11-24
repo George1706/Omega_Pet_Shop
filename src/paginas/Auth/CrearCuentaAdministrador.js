@@ -4,14 +4,14 @@ import APIInvoke from "../../utils/APIInvoke.js";
 import swal from "sweetalert";
 import '../../css/login.css'
 
-const CrearCuenta = () => {
+const CrearCuentaAdministrador = () => {
     const [usuario, setUsuario] = useState({
     nombre: "",
     email: "",
     telefono: "",
     password: "",
     confirmar: "",
-    rol: 'cliente' //El rol solo se cambiara si se necesita cambiarlo, es el bd.json
+    rol: 'administrador' //El rol solo se cambiara si se necesita cambiarlo, es el bd.json
     });
 
     const { nombre, email, telefono, password, confirmar, rol } = usuario;
@@ -156,7 +156,7 @@ const CrearCuenta = () => {
             backgroundPosition: '0 0',
             transition: 'background-position 0.5s',
             textTransform: 'none',
-          }}>Crear </b>Cuenta
+          }}>Crear Cuenta</b> Administrador
             </Link>
         </div>
        
@@ -185,7 +185,7 @@ const CrearCuenta = () => {
                 <input
                     type="email"
                     className="form-control"
-                    placeholder="Correo"
+                    placeholder="Correo Electronico"
                     id="email"
                     name="email"
                     value={email}
@@ -269,4 +269,4 @@ const CrearCuenta = () => {
         );
 };
 
-export default CrearCuenta;
+export default CrearCuentaAdministrador;

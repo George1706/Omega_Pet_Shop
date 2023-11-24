@@ -142,6 +142,7 @@ const TAdmin = () => {
                                                 <td>{item.idC}</td>
                                                 <td>{item.descripcion}</td>
                                                 <td>
+                                                    {item.imagenURL && <img src={item.imagenURL} alt={item.nombre} style={{ maxWidth: '100px', maxHeight: '100px' }} />}
                                                     <Link to={`/TEditar/${item.id}@${item.nombre}@${item.precio}@${item.idT}@${item.idC}@${item.descripcion}@${nombreTienda}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp;&nbsp;
                                                     <button onClick={(e) => eliminarProducto(e, item.id, item.idT)} className="btn btn-sm btn-danger">Borrar</button>
                                                 </td>

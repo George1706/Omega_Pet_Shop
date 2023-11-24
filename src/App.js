@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import Login from './paginas/Auth/Login';
 import Menu from './paginas/Menu'
 import CrearCuenta from './paginas/Auth/CrearCuenta';
+import CrearCuentaAdministrador from './paginas/Auth/CrearCuentaAdministrador';
 import ProyectosAdmin from './paginas/tienda/ProyectosAdmin';
 import PCrear from './paginas/tienda/PCrear';
 import PEditar from './paginas/tienda/PEditar';
@@ -19,6 +20,7 @@ import EditarPedidos from './paginas/pedidos/EditarPedidos';
 import ComprarProducto from './paginas/clientes/ComprarProducto';
 import VerProductos from './paginas/clientes/verProductos';
 import VerProductosPropios from './paginas/clientes/VerProductosPropios';
+import LoginPage from './paginas/Auth/LoginPage';
 
 function App() {
   return (
@@ -26,9 +28,11 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' exact element = {<Login/>}/>
+          <Route path='/LoginPage' exact element = {<LoginPage/>}/>
           <Route path='/Menu' exact element = {<Menu/>}/>
           <Route path='/MenuClientes' exact element = {<MenuClientes/>}/>
           <Route path='/CrearCuenta' exact element = {<CrearCuenta/>}/>
+          <Route path='/CrearCuentaAdministrador' exact element = {<CrearCuentaAdministrador/>}/>
           <Route path='/ProyectosAdmin' exact element = {<ProyectosAdmin/>}/>
           <Route path='/PCrear' exact element = {<PCrear/>}/>
           <Route path='/VerTiendas' exact element = {<VerTiendasClientes/>}/>

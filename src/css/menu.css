@@ -1,0 +1,69 @@
+@keyframes moverCarro {
+    0% { left: -100px; } /* Comienza fuera del contenedor hacia la izquierda */
+    100% { left: 100%; } /* Termina fuera del contenedor hacia la derecha */
+  }
+  
+  .icon-container {
+    position: relative; /* Asegura el posicionamiento relativo */
+    width: 877px; /* Ancho del contenedor */
+    height: 100px; /* Alto del contenedor */
+    overflow:hidden; /* Oculta el contenido que se desborda */
+  }
+  
+  .mover {
+    position: absolute;
+    animation: moverCarro 8s linear infinite;
+  }
+
+  .bg-rosado-oscuro {
+    background: linear-gradient(135deg, #FF69B4, #8A2BE2);
+    color: rgb(255, 222, 184);
+  }
+  
+  .bg-rosado-clarito {
+    background: linear-gradient(135deg, #000000, #8A2BE2);
+    color: #FFF; /* Color de texto blanco o el que prefieras */
+  }
+
+  .icon i {
+    color:rgb(0, 0, 0);
+  }
+
+/* Ejemplo de animación para la clase .animar-categoria */
+@keyframes agregarCategoria {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Aplicar la animación */
+.animar-categoria {
+  animation: agregarCategoria 1s ease infinite; /* Aquí se define la animación */
+}
+
+
+
+
+/* Ejemplo de animación para la clase .animar-tienda */
+@keyframes agregarTienda {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Aplicar la animación */
+  .animar-tienda {
+    animation: agregarTienda 1s ease infinite; /* Aquí se define la animación */
+  }

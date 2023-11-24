@@ -4,7 +4,7 @@ import SidebarContainer from "../componentes/SidebarContainer";
 import ContentHeader from "../componentes/ContentHeader";
 import Footer from "../componentes/Footer";
 import { Link } from "react-router-dom";
-
+import "../css/menu.css"
 const Menu = () => {
   return (
     <div className="wrapper">
@@ -21,13 +21,13 @@ const Menu = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-7 col-8">
-                <div className="small-box bg-red">
+                <div className="small-box bg-rosado-oscuro">
                   <div className="inner">
                     <h3>Tiendas</h3>
                     <p>&nbsp;</p>
                   </div>
                   <div className="icon">
-                    <i className="fas fa-shopping-bag"></i>
+                    <i className="fas fa-shopping-bag animar-tienda"></i>
                   </div>
                   <Link to={"/ProyectosAdmin"} className="small-box-footer">
                     Crear tiendas <i className="fas fa-arrow-circle-right"></i>
@@ -36,13 +36,13 @@ const Menu = () => {
               </div>
 
               <div className="col-lg-7 col-8">
-                <div className="small-box bg-orange">
+                <div className="small-box bg-rosado-clarito">
                   <div className="inner">
                     <h3>Categoría</h3>
                     <p>&nbsp;</p>
                   </div>
                   <div className="icon">
-                    <i className="fas fa-laptop"></i>
+                    <i className="fas fa-laptop animar-categoria"></i>
                   </div>
                   <Link to={"/VerCategoria"} className="small-box-footer">
                     Crear categoría <i className="fas fa-arrow-circle-right"></i>
@@ -50,13 +50,13 @@ const Menu = () => {
                 </div>
               </div>
               <div className="col-lg-7 col-8">
-                <div className="small-box bg-purple">
+                <div className="small-box bg-rosado-oscuro">
                   <div className="inner">
                     <h3>Pedidos</h3>
                     <p>&nbsp;</p>
                   </div>
-                  <div className="icon">
-                    <i className="fas fa-truck"></i>
+                  <div className="icon icon-container">
+                    <i className="fas fa-truck mover"></i> 
                   </div>
                   <Link to={"/VerPedidos"} className="small-box-footer">
                     Ver pedidos <i className="fas fa-arrow-circle-right"></i>
