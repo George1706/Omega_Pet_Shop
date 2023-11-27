@@ -11,7 +11,7 @@ const CrearCuentaAdministrador = () => {
     telefono: "",
     password: "",
     confirmar: "",
-    rol: 'administrador' //El rol solo se cambiara si se necesita cambiarlo, es el bd.json
+    rol: 'administrador'
     });
 
     const { nombre, email, telefono, password, confirmar, rol } = usuario;

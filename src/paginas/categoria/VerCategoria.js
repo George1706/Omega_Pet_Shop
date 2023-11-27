@@ -103,7 +103,7 @@ const VerCategorias = () => {
             <section className="content">
                 <div className="card">
                     <div className="card-header">
-                    <h3 className="card-title"><Link to={"/crearCategorias"} className="btn btn-block btn-primary btn-sm">Registrar categoría</Link></h3>
+                    <h3 className="card-title"><Link to={"/crearCategorias"} className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Registrar categoría</Link></h3>
                         <div className="card-tools">
                             <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i className="fas fa-minus" />
@@ -114,7 +114,7 @@ const VerCategorias = () => {
                         </div>
                     </div>
                     <div className="card-body">
-                        <table className="table table-bordered">
+                        <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th style={{ width: '10%' }}>#</th>
@@ -128,8 +128,10 @@ const VerCategorias = () => {
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.nombre}</td>
-                                            <Link to={`/EditarCategorias/${item.id}@${item.nombre}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp;&nbsp;
-                                            <button onClick={(e) => eliminarCategoria(e, item.id)} className="btn btn-sm btn-danger">Borrar</button>
+                                            <td>
+                                            <Link to={`/EditarCategorias/${item.id}@${item.nombre}`} className="btn btn-sm btn-primary ml-2">Editar</Link>
+                                            <button onClick={(e) => eliminarCategoria(e, item.id)} className="btn btn-sm btn-danger ml-2">Borrar</button>
+                                            </td>
                                             </tr>
                                     )}
                             </tbody>

@@ -86,7 +86,7 @@ const CrearCategoria = () => {
             <div className="content-wrapper">
 
                 <ContentHeader
-                    titulo={"creación de categorias"}
+                    titulo={"Creación de categorias"}
                     breadCrumb1={"Listado de categorias"}
                     breadCrumb2={"creación"}
                     ruta1={"/visualizar-categorias"}
@@ -114,7 +114,7 @@ const CrearCategoria = () => {
                                 </div>
                                 
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">crear</button>
+                                    <button type="submit" className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Crear Categoría</button>
                                 </div>
                             </form>
 

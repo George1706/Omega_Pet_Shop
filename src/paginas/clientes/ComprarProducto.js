@@ -40,25 +40,29 @@ const [venta, setVentas] = useState({
 
 const { nombre, direccion, telefono,categoria} = venta;
 
+const [productosTienda, setProductosTienda] = useState([]);
 const [categoriasTienda, setCategoriasTienda] = useState([]);
 
 useEffect(() => {
-    // Llamar a la API para obtener las categorías de la tienda
-    const fetchCategorias = async () => {
-        try {
-            const response = await APIInvoke.invokeGET(`/Tiendas/${idTienda}/categorias`);
-            // Actualizar el estado con las categorías obtenidas
-            if (response && response.length > 0) {
-                setCategoriasTienda(response);
-            }
-        } catch (error) {
-            console.error('Error al obtener las categorías', error);
-        }
-    };
+  const fetchTiendaData = async () => {
+    try {
+      const productosResponse = await APIInvoke.invokeGET(`/tiendas/${idTienda}/productos`);
+      const categoriasResponse = await APIInvoke.invokeGET(`/Tiendas/${idTienda}/categorias`);
 
-    fetchCategorias();
+      if (Array.isArray(productosResponse) && productosResponse.length > 0) {
+        setProductosTienda(productosResponse);
+      }
+
+      if (categoriasResponse && categoriasResponse.length > 0) {
+        setCategoriasTienda(categoriasResponse);
+      }
+    } catch (error) {
+      console.error('Error al obtener productos/categorías', error);
+    }
+  };
+
+  fetchTiendaData();
 }, [idTienda]);
-
 useEffect(() => {
     document.getElementById("nombre").focus();
 }, [])
@@ -135,23 +139,6 @@ const onSubmit = (e) => {
     e.preventDefault();
     realizarVenta()
 }
- const [productosTienda, setProductosTienda] = useState([]);
-
-    useEffect(() => {
-        // Llamar a la API para obtener los productos de la tienda
-        const fetchProductos = async () => {
-            try {
-                const response = await APIInvoke.invokeGET(`/tiendas/${idTienda}/productos`);
-                if (Array.isArray(response) && response.length > 0) {
-                    setProductosTienda(response);
-                }
-            } catch (error) {
-                console.error('Error al obtener los productos', error);
-            }
-        };
-
-        fetchProductos();
-    }, [idTienda]);
 
     return ( 
         <div className="wrapper">
@@ -205,47 +192,46 @@ const onSubmit = (e) => {
                                         <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese su número de telefónico" value={telefono} onChange={onChange} required />
                                     </div>
                                     <div className="form-group">
-                                      <label htmlFor="producto">Producto:</label>
-                                      <select
-                                        className="form-control"
-                                        id="producto"
-                                        name="idP"
-                                        value={selectedProduct} // Usar el estado para el valor del select
-                                        onChange={onProductChange} // Manejar cambios en la selección
-                                        required
-                                      >
-                                        <option value="">Seleccione un producto</option>
-                                        {/* Mapear los productos disponibles */}
-                                        {productosTienda.map((producto) => (
-                                          <option key={producto.id} value={producto.id}>
-                                            {producto.nombre}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    </div>
-                                    <div className="form-group">
-                                <label htmlFor="categoria">Categoría:</label>
-                                <select
-                                    className="form-control"
-                                    id="categoria"
-                                    name="categoria"
-                                    value={categoria}
-                                    onChange={onChange}
-                                    required
-                                >
-                                    <option value="">Seleccione una categoría</option>
-                                    {/* Mapear las categorías disponibles */}
-                                    {categoriasTienda.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>
-                                            {cat.nombre}
-                                        </option>
-                                    ))}
-                                </select>
+<label htmlFor="producto">Producto:</label>
+        <select
+            className="form-control"
+            id="producto"
+            name="idP"
+            value={selectedProduct}
+            onChange={onProductChange}
+            required
+        >
+            <option value="">Seleccione un producto</option>
+            {productosTienda.map((producto) => (
+                <option key={producto.id} value={producto.id}>
+                    {producto.nombre}
+                </option>
+            ))}
+        </select>
+    </div>
+
+    <div className="form-group">
+        <label htmlFor="categoria">Categoría:</label>
+        <select
+            className="form-control"
+            id="categoria"
+            name="categoria"
+            value={categoria}
+            onChange={onChange}
+            required
+        >
+            <option value="">Seleccione una categoría</option>
+            {categoriasTienda.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                    {cat.nombre}
+                </option>
+            ))}
+        </select>
                             </div>
                                 </div>
 
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">comprar</button>
+                                    <button type="submit" className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Comprar</button>
                                 </div>
                             </form>
 

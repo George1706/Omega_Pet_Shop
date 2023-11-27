@@ -10,7 +10,7 @@ import swal from "sweetalert2";
 
 const EditarCategoria = () => {
 
-    const navigate=useNavigate();
+    const navigate=useNavigate(); 
 
     const {idCategoria}=useParams();
     let arreglo = idCategoria.split('@')
@@ -121,15 +121,17 @@ const EditarCategoria = () => {
                         <div className="card-body">
                             <form  onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
-                                <div className="form-group">
-                                        <label htmlFor="nombre">Nombre:</label>
+                                <div className="form-group row">
+                                        <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre:</label>
+                                        <div className="col-sm-10">
                                         <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre de la Categoría" value={nombre} onChange={onChange} required />
+                                        </div>
                                     </div>
 
                                 </div>
 
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Editar</button>
+                                    <button type="submit" className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Editar Categoría</button>
                                 </div>
                             </form>
 

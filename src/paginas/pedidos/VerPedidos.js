@@ -106,7 +106,7 @@ const VerPedidos = () => {
                         </div>
                     </div>
                     <div className="card-body">
-                    <table className="table table-bordered">
+                    <table className="table table-striped">
                             <thead>
                                 <tr>
                                     {/* Eliminar las columnas # y # Producto */}
@@ -128,7 +128,7 @@ const VerPedidos = () => {
                                             <td>{item.nombre}</td>
                                             <td>{item.direccion}</td>
                                             <td>{item.telefono}</td>
-                                            <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProducto}@${item.nombreCategoria}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary">Editar</Link></td>
+                                            <td><Link to={`/editarPedidos/${item.id}@${item.idP}@${item.nombreProducto}@${item.nombreCategoria}@${item.nombre}@${item.direccion}@${item.telefono}`} className="btn btn-sm btn-primary ml-2">Editar</Link></td>
                                         </tr>
                                     )}
                             </tbody>

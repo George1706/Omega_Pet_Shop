@@ -165,7 +165,7 @@ const TCrear = () => {
                                     </div>
                             </div>
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Crear Producto</button>
+                                    <button type="submit" className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Crear Producto</button>
                                 </div>
                             </form>
 

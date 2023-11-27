@@ -162,8 +162,9 @@ const EditarPedidos = () => {
                         <div className="card-body">
                             <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
-                                <div className="form-group">
-                            <label htmlFor="producto">Producto:</label>
+                                <div className="form-group row">
+                            <label htmlFor="producto" className="col-sm-2 col-form-label">Producto:</label>
+                            <div className="col-sm-10">
                             <select
                                 className="form-control"
                                 id="producto"
@@ -179,9 +180,11 @@ const EditarPedidos = () => {
                                     </option>
                                 ))}
                             </select>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="categoria">Categoría:</label>
+                        <div className="form-group row">
+                            <label htmlFor="categoria" className="col-sm-2 col-form-label">Categoría:</label>
+                            <div className="col-sm-10">
                             <select
                                 className="form-control"
                                 id="categoria"
@@ -197,9 +200,11 @@ const EditarPedidos = () => {
                                     </option>
                                 ))}
                             </select>
+                            </div>
                         </div>
-                                    <div className="form-group">
-                                        <label htmlFor="categoria">Nombre cliente:</label>
+                                    <div className="form-group row">
+                                        <label htmlFor="categoria" className="col-sm-2 col-form-label">Nombre cliente:</label>
+                                        <div className="col-sm-10">
                                         <input type="text" 
                                         className="form-control" 
                                         id="nombre" 
@@ -207,9 +212,11 @@ const EditarPedidos = () => {
                                         placeholder="Ingrese el nombre del cliente" 
                                         value={nombre} 
                                         onChange={onChange} required />
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="direccion">Dirección:</label>
+                                    <div className="form-group row">
+                                        <label htmlFor="direccion" className="col-sm-2 col-form-label">Dirección:</label>
+                                        <div className="col-sm-10">
                                         <input
                                             type="text"
                                             className="form-control"
@@ -218,11 +225,12 @@ const EditarPedidos = () => {
                                             placeholder="Ingrese la dirección"
                                             value={direccion}
                                             onChange={onChange}
-                                            required
-                                        />
+                                            required/>
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="categoria">Telefono:</label>
+                                    <div className="form-group row">
+                                        <label htmlFor="categoria" className="col-sm-2 col-form-label">Telefono:</label>
+                                        <div className="col-sm-10">
                                         <input type="text" 
                                         className="form-control" 
                                         id="telefono" 
@@ -230,12 +238,13 @@ const EditarPedidos = () => {
                                         placeholder="Ingrese el telefono" 
                                         value={telefono} 
                                         onChange={onChange} required />
+                                        </div>
                                     </div>
 
                                 </div>
 
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Editar</button>
+                                    <button type="submit" className="btn btn-light" style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Editar Pedido</button>
                                 </div>
                             </form>
 

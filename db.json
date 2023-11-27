@@ -26,6 +26,38 @@
       "password": "Jorge123",
       "rol": "cliente",
       "id": 3
+    },
+    {
+      "nombre": "Maria del Carmen Pineda Care",
+      "email": "mp0765891@gmail.com",
+      "telefono": "3124018772",
+      "password": "Maria123456",
+      "rol": "administrador",
+      "id": 4
+    },
+    {
+      "nombre": "Jorge Pineda Care",
+      "email": "jorgepineda12@gmail.com",
+      "telefono": "1241234243",
+      "password": "123456",
+      "rol": "administrador",
+      "id": 5
+    },
+    {
+      "nombre": "Laura Trigo",
+      "email": "lautrigo@gmail.com",
+      "telefono": "242423232",
+      "password": "222222",
+      "rol": "administrador",
+      "id": 6
+    },
+    {
+      "nombre": "Jorge",
+      "email": "jpinedacare@gmail.com",
+      "telefono": "3214781761",
+      "password": "123456",
+      "rol": "administrador",
+      "id": 7
     }
   ],
   "Categorias": [
@@ -44,8 +76,7 @@
       "nombre": "CatsAndDogs",
       "direccion": "calle34 Bis 67",
       "telefono": "3225678907",
-      "correo": "huellas",
-      "estado": false
+      "correo": "huellas@gmail.com"
     },
     {
       "nombre": "Perricatss",
@@ -164,6 +195,22 @@
       "idC": "2",
       "descripcion": "grande",
       "estado": false
+    },
+    {
+      "idT": "1",
+      "nombre": "Pelota Gato",
+      "precio": "23000",
+      "idC": "2",
+      "descripcion": "Redonda",
+      "id": 3
+    },
+    {
+      "idT": "2",
+      "nombre": "Cama robusta",
+      "precio": "3423233232",
+      "idC": "2",
+      "descripcion": "qwdsdsadsad",
+      "id": 4
     }
   ]
 }

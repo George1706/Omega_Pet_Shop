@@ -101,7 +101,7 @@ const ProyectosAdmin = () => {
                 <section className="content">
                     <div className="card">
                         <div className="card-header">
-                        <h3 className="card-title"><Link to={"/PCrear"} className="btn btn-block btn-primary btn-sm">Registrar Tienda</Link></h3>
+                        <h3 className="card-title"><Link to={"/PCrear"} className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Registrar Tienda</Link></h3>
                             <div className="card-tools">
                         
 
@@ -114,37 +114,50 @@ const ProyectosAdmin = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <table className="table table-bordered">
+                        <table className="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: '10%' }}>#</th>
-                                        <th style={{ width: '40%' }}>Nombre</th>
-                                        <th style={{ width: '35%' }}>Dirección</th>
-                                        <th style={{ width: '35%' }}>Telefono</th>
-                                        <th style={{ width: '35%' }}>Correo</th>
-                                        <th style={{ width: '15%' }}>Opciones</th>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        tiendas.map((item) => (
-                                            <tr key={item.id}>
-                                                <td>{item.id}</td>
-                                                <td>{item.nombre}</td>
-                                                <td>{item.direccion}</td>
-                                                <td>{item.telefono}</td>
-                                                <td>{item.correo}</td>            
-                                                <td>
-                                                    <Link to={`/TAdmin/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`} className="btn btn-sm btn-info">Productos</Link> &nbsp;&nbsp;
-                                                    <Link to={`/PEditar/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`} className="btn btn-sm btn-primary">Editar</Link> &nbsp;&nbsp;
-                                                    <button onClick={(e) => eliminarTienda(e, item.id)} className="btn btn-sm btn-danger">Borrar</button>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                    {tiendas.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.nombre}</td>
+                                            <td>{item.direccion}</td>
+                                            <td>{item.telefono}</td>
+                                            <td>{item.correo}</td>
+                                            <td>
+                                                <Link
+                                                    to={`/TAdmin/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`}
+                                                    className="btn btn-sm btn-success"
+                                                >
+                                                    Productos
+                                                </Link>
+                                                <Link
+                                                    to={`/PEditar/${item.id}@${item.nombre}@${item.direccion}@${item.telefono}@${item.correo}`}
+                                                    className="btn btn-sm btn-primary ml-2"
+                                                >
+                                                    Editar
+                                                </Link>
+                                                <button
+                                                    onClick={(e) => eliminarTienda(e, item.id)}
+                                                    className="btn btn-sm btn-danger ml-2"
+                                                >
+                                                    Borrar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
-
-
                             </table>
+
                         </div>
                     </div>
 

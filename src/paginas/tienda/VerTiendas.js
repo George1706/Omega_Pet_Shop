@@ -48,7 +48,6 @@ const VerTiendas = () => {
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Opciones</th>
-            <th>Comprar</th>
             </tr>
         </thead>
         <tbody>
@@ -57,8 +56,7 @@ const VerTiendas = () => {
                 <td>{tienda.id}</td> 
                 <td>{tienda.nombre}</td>
                 <td>{tienda.direccion}</td>
-                <td> <Link to={`/VerProductosPropios/${tienda.id}@${tienda.nombre}@${tienda.direccion}`} className="btn tbn-sm btn-danger">Ver productos</Link></td>
-                <td> <Link to={`/ComprarProducto/${tienda.id}@${tienda.nombre}`} className="btn btn-sm btn-primary">Comprar productos</Link></td>
+                <td> <Link to={`/VerProductosPropios/${tienda.id}@${tienda.nombre}`} className="btn tbn-sm btn-light"  style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Ver productos</Link></td>
             </tr>
             ))}
         </tbody>

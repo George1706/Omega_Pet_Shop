@@ -6,7 +6,7 @@ import Navbar from "../../componentes/Navbar";
 import SidebarContainer from "../../componentes/SidebarContainer";
 import { useNavigate, useParams } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
-import swal from "sweetalert2";
+import swal from "sweetalert2"; 
 
 
 const TEditar = () => {
@@ -151,39 +151,44 @@ const TEditar = () => {
                         <div className="card-body">
                             <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
-                                <div className="form-group">
-                                        <label htmlFor="nombre">Nombre:</label>
-                                        <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" value={nombre} onChange={onChange} required />
+                                    <div className="form-group row">
+                                        <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre:</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" value={nombre} onChange={onChange} required />
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="tienda">Precio:</label>
-                                        <input type="text" className="form-control" id="precio" name="precio" placeholder="Ingrese el precio del producto" value={precio} onChange={onChange} required />
+                                    <div className="form-group row">
+                                        <label htmlFor="precio" className="col-sm-2 col-form-label">Precio:</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="precio" name="precio" placeholder="Ingrese el precio del producto" value={precio} onChange={onChange} required />
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                    <label htmlFor="idC">Categoría:</label>
-                                    <select className="form-control" id="idC" name="idC" value={idC} onChange={onChange} required>
-                                        <option value="">Seleccione una categoría</option>
-                                        {categorias.map((categoria) => (
-                                            <option key={categoria.id} value={categoria.id}>
-                                                {categoria.nombre}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <div className="form-group row">
+                                        <label htmlFor="idC" className="col-sm-2 col-form-label">Categoría:</label>
+                                        <div className="col-sm-10">
+                                            <select className="form-control" id="idC" name="idC" value={idC} onChange={onChange} required>
+                                                <option value="">Seleccione una categoría</option>
+                                                {categorias.map((categoria) => (
+                                                    <option key={categoria.id} value={categoria.id}>
+                                                        {categoria.nombre}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="descripcion">Descripción:</label>
-                                        <input type="text" className="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción del producto" value={descripcion} onChange={onChange} required />
+                                    <div className="form-group row">
+                                        <label htmlFor="descripcion" className="col-sm-2 col-form-label">Descripción:</label>
+                                        <div className="col-sm-10">
+                                            <input type="text" className="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción del producto" value={descripcion} onChange={onChange} required />
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Editar</button>
+                                    <button type="submit" className="btn btn-light" style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}>Editar Producto</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
-
                 </section>
             </div>
             <Footer></Footer>

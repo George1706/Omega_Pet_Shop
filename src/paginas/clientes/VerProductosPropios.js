@@ -12,10 +12,26 @@ const VerProductosPropios = () => {
 
     const [productos, setProductos] = useState([]);
     const [categorias, setCategorias] = useState({});
-
+    const [filtroNombre, setFiltroNombre] = useState("");
+    const [filtroCategoria, setFiltroCategoria] = useState("");
+    const [productosFiltrados, setProductosFiltrados] = useState([]);
+    const [filtroAplicado, setFiltroAplicado] = useState(false);
+    const [nombresProductos, setNombresProductos] = useState([]);
+    const cargarNombresProductos = async () => {
+        try {
+            const response = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
+            if (Array.isArray(response) && response.length > 0) {
+                const nombres = response.map((producto) => producto.nombre);
+                setNombresProductos(nombres);
+            }
+        } catch (error) {
+            console.error('Error al cargar los nombres de los productos:', error);
+        }
+    };
+    
     const cargarCategorias = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/categorias`);
+            const response = await APIInvoke.invokeGET(`/categorias?idT=${idTienda}`);
             if (Array.isArray(response) && response.length > 0) {
                 // Mapear categorías para tener un objeto con el formato ID -> Nombre
                 const categoriasMap = response.reduce((acc, cat) => {
@@ -28,10 +44,10 @@ const VerProductosPropios = () => {
             console.error('Error al cargar las categorías:', error);
         }
     };
-
     useEffect(() => {
         cargarProductos();
         cargarCategorias();
+        cargarNombresProductos();
     }, []);
 
     const { idProyecto } = useParams();
@@ -40,10 +56,35 @@ const VerProductosPropios = () => {
     const nombreTienda = arreglo[1]
     const tituloPag = `Listado de productos: ${nombreTienda}`
 
+    const filtrarProductos = () => {
+        let productosFiltradosTemp = [...productos];
+
+        if (filtroNombre) {
+            productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
+                producto.nombre.toLowerCase().includes(filtroNombre.toLowerCase())
+            );
+        }
+
+        if (filtroCategoria) {
+            productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
+                categorias[producto.idC]?.toLowerCase() === filtroCategoria.toLowerCase()
+            );
+        }
+
+        setProductosFiltrados(productosFiltradosTemp);
+        setFiltroAplicado(true);
+    };
+
+    const limpiarFiltro = () => {
+        setFiltroNombre("");
+        setFiltroCategoria("");
+        setProductosFiltrados([]);
+        setFiltroAplicado(false);
+    };
     const cargarProductos = async () => {
         try {
             var response = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
-            console.log('Respuesta de la API:', response); // Verifica la respuesta
+            console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
                 setProductos(response);
@@ -127,9 +168,36 @@ const VerProductosPropios = () => {
                     titulo={tituloPag}
                     breadCrumb1={" Listado de proyectos"}
                     breadCrumb2={"Productos"}
-                    ruta1={"/MenuClientes"}
+                    ruta1={"/VerTiendas"}
                 />
                 <section className="content">
+                <div className="mb-3">
+                <select
+    value={filtroNombre}
+    onChange={(e) => setFiltroNombre(e.target.value)}
+>
+    <option value="">Selecciona un nombre de producto</option>
+    {productos.map((producto) => (
+        <option key={producto.id} value={producto.nombre}>
+            {producto.nombre}
+        </option>
+    ))}
+</select>
+
+<select
+    value={filtroCategoria}
+    onChange={(e) => setFiltroCategoria(e.target.value)}
+>
+    <option value="">Selecciona una categoría</option>
+    {Object.values(categorias).map((categoria, index) => (
+        <option key={index} value={categoria}>
+            {categoria}
+        </option>
+    ))}
+</select>
+                        <button onClick={filtrarProductos}>Buscar</button>
+                        <button onClick={limpiarFiltro}>Limpiar</button>
+                    </div>
                     <div className="card">
                         <div className="card-header">
                             <div className="card-tools">
@@ -142,31 +210,59 @@ const VerProductosPropios = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <table className="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: '15%' }}>#</th>
-                                        <th style={{ width: '10%' }}>Nombre</th>
-                                        <th style={{ width: '10%' }}>Precio</th>
-                                        <th style={{ width: '10%' }}>Tienda</th>
-                                        <th style={{ width: '10%' }}>Categoria</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        productos.map(item =>
-                                            <tr key={item.id}>
-                                                <td>{item.id}</td>
-                                                <td>{item.nombre}</td>
-                                                <td>{item.precio}</td>
-                                                <td>{nombreTienda}</td>
-                                                <td>{categorias[item.idC]}</td>
-                                            </tr>
-                                        )}
-                                </tbody>
-
-
-                            </table>
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style={{ width: '15%' }}>#</th>
+                                    <th style={{ width: '10%' }}>Nombre</th>
+                                    <th style={{ width: '10%' }}>Precio</th>
+                                    <th style={{ width: '10%' }}>Tienda</th>
+                                    <th style={{ width: '10%' }}>Categoría</th>
+                                    <th style={{ width: '10%' }}>Comprar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {(filtroAplicado && productosFiltrados.length > 0) ? (
+                                    productosFiltrados.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.nombre}</td>
+                                            <td>{item.precio}</td>
+                                            <td>{nombreTienda}</td>
+                                            <td>{categorias[item.idC]}</td>
+                                            <td>
+                                                <Link
+                                                    to={`/ComprarProducto/${idTienda}@${nombreTienda}@${item.id}`}
+                                                    className="btn tbn-sm btn-light"
+                                                    style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}
+                                                >
+                                                    Comprar
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    productos.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.nombre}</td>
+                                            <td>{item.precio}</td>
+                                            <td>{nombreTienda}</td>
+                                            <td>{categorias[item.idC]}</td>
+                                            <td>
+                                                <Link
+                                                    to={`/ComprarProducto/${idTienda}@${nombreTienda}@${item.id}`}
+                                                    className="btn tbn-sm btn-light"
+                                                    style={{ backgroundImage: 'linear-gradient(135deg, #FF69B4, #8A2BE2)', color: 'white' }}
+                                                >
+                                                    Comprar
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
                         </div>
                     </div>
 

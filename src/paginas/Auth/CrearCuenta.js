@@ -11,7 +11,7 @@ const CrearCuenta = () => {
     telefono: "",
     password: "",
     confirmar: "",
-    rol: 'cliente' //El rol solo se cambiara si se necesita cambiarlo, es el bd.json
+    rol: 'cliente'
     });
 
     const { nombre, email, telefono, password, confirmar, rol } = usuario;
