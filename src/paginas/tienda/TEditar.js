@@ -25,14 +25,15 @@ const TEditar = () => {
     const nombreTienda= arreglo[6]
     const tituloPag = `Actualización de productos: ${nombreTienda}`
 
-
+    const productosId = localStorage.getItem("id");
     const [productos, setproductos] = useState({
         id:idProducto,
         nombre: nombreProducto,
         precio:precioProducto,
         idT:idTienda,
         idC:idCategoria,
-        descripcion:descripProd
+        descripcion:descripProd,
+        productosId:productosId
     })
 
     const { nombre, precio, idC, descripcion} = productos;

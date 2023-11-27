@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert2";
 
-
+ 
 
 
 const ComprarProductos = () => {
@@ -40,14 +40,17 @@ const [venta, setVentas] = useState({
 
 const { nombre, direccion, telefono,categoria} = venta;
 
+const userId = localStorage.getItem("id");
+
+const productosId = localStorage.getItem("id");
 const [productosTienda, setProductosTienda] = useState([]);
 const [categoriasTienda, setCategoriasTienda] = useState([]);
-
+const categoriasId = localStorage.getItem("id");
 useEffect(() => {
   const fetchTiendaData = async () => {
     try {
-      const productosResponse = await APIInvoke.invokeGET(`/tiendas/${idTienda}/productos`);
-      const categoriasResponse = await APIInvoke.invokeGET(`/Tiendas/${idTienda}/categorias`);
+      const productosResponse = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
+      const categoriasResponse = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
 
       if (Array.isArray(productosResponse) && productosResponse.length > 0) {
         setProductosTienda(productosResponse);
@@ -77,14 +80,15 @@ const onChange = (e) => {
 const realizarVenta = async () => {
     let arreglo = idVenta.split('@')
     const idProducto= arreglo[0]
-
+    const pedidoId = localStorage.getItem("id");
     const data = {
         idP: idProducto,
         nombreProd:nombreProducto,
         nombre:venta.nombre,
         direccion:venta.direccion,
         telefono:venta.telefono,
-        categoria:venta.categoria
+        categoria:venta.categoria,
+        pedidoId:pedidoId
     }
 
     console.log(data)
@@ -167,12 +171,15 @@ const onSubmit = (e) => {
                         <div className="card-body">
                             <form onSubmit={onSubmit} noValidate>
                                 <div className="card-body">
-                                <div className="form-group">
-                                        <label htmlFor="nombre">Nombre Cliente:</label>
+                                <div className="form-group row">
+                                        <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre Cliente:</label>
+                                        <div className="col-sm-10">
                                         <input type="text" className="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" value={nombre} onChange={onChange} required />
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                    <label htmlFor="direccion">Dirección:</label>
+                                    <div className="form-group row">
+                                    <label htmlFor="direccion" className="col-sm-2 col-form-label">Dirección:</label>
+                                    <div className="col-sm-10">
                                     <input
                                         type="text"
                                         className="form-control"
@@ -186,13 +193,17 @@ const onSubmit = (e) => {
                                         required
                                     />
                                     </div>
-
-                                    <div className="form-group">
-                                        <label htmlFor="categoria">Teléfono:</label>
-                                        <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese su número de telefónico" value={telefono} onChange={onChange} required />
                                     </div>
-                                    <div className="form-group">
-<label htmlFor="producto">Producto:</label>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="categoria" className="col-sm-2 col-form-label">Teléfono:</label>
+                                        <div className="col-sm-10">
+                                        <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ingrese su número de telefónico" value={telefono} onChange={onChange} required />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+<label htmlFor="producto" className="col-sm-2 col-form-label">Producto:</label>
+<div className="col-sm-10">
         <select
             className="form-control"
             id="producto"
@@ -208,10 +219,12 @@ const onSubmit = (e) => {
                 </option>
             ))}
         </select>
+        </div>
     </div>
 
-    <div className="form-group">
-        <label htmlFor="categoria">Categoría:</label>
+    <div className="form-group row">
+        <label htmlFor="categoria" className="col-sm-2 col-form-label">Categoría:</label>
+        <div className="col-sm-10">
         <select
             className="form-control"
             id="categoria"
@@ -227,6 +240,7 @@ const onSubmit = (e) => {
                 </option>
             ))}
         </select>
+        </div>
                             </div>
                                 </div>
 

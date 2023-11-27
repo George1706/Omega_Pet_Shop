@@ -9,19 +9,21 @@ import APIInvoke from "../../utils/APIInvoke";
 
 
 const VerPedidos = () => {
+    const productosId = localStorage.getItem("id");
+    const categoriasId = localStorage.getItem("id");
     const [ventas, setVentas] = useState([]);
-
+    const ventasId = localStorage.getItem("id");
     const cargarPedidos = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/ventas`);
+            const response = await APIInvoke.invokeGET(`/ventas?ventasId=${ventasId}`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
                 // Actualizar los detalles de producto y categoría antes de actualizar el estado
                 const ventasConDetalles = await Promise.all(
                     response.map(async (venta) => {
-                        const productos = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
-                        const categoria = await APIInvoke.invokeGET(`/categorias/${productos.idC}`);
+                        const productos = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);
+                        const categoria = await APIInvoke.invokeGET(`/categorias?categoriasId${categoriasId}`);
                         
                         return {
                             ...venta,
@@ -48,9 +50,9 @@ const VerPedidos = () => {
     const obtenerProductoCategoria = async (venta) => {
         try {
             // Obtener el producto
-            const productos = await APIInvoke.invokeGET(`/productos/${venta.idP}`);
+            const productos = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
             // Obtener la categoría
-            const categoria = await APIInvoke.invokeGET(`/categorias/${productos.idC}`);
+            const categoria = await APIInvoke.invokeGET(`/categorias?categoriasId${categoriasId}`);
 
             // Almacenar en ventas con información adicional
             setVentas(prevVentas => [

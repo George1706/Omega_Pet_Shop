@@ -17,8 +17,20 @@ const CrearCategoria = () => {
     })
 
     const {nombre}=categorias;
+    const categoriasId = localStorage.getItem("id");
+
+    const cargarCategorias= async () => {
+        try {
+          const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
+          setCategorias(response);
+        } catch (error) {
+          console.error("Error a cargar la categoria", error);
+        }
+      };
+
 
     useEffect(() => {
+        cargarCategorias();
         document.getElementById("nombre").focus();
     }, [])
 
@@ -29,8 +41,10 @@ const CrearCategoria = () => {
         })
     }
     const crearCategoria = async () =>{
+        const categoriasId = localStorage.getItem("id");
         const data ={
-            nombre: categorias.nombre
+            nombre: categorias.nombre,
+            categoriasId: categoriasId
         }
         const response = await APIInvoke.invokePOST('/Categorias', data);
         const idCategoria = response.id;

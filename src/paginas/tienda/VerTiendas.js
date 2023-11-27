@@ -41,7 +41,7 @@ const VerTiendas = () => {
             ruta1={"/MenuClientes"}
         />
     <div className="card-body">
-        <table className="table table-bordered">
+        <table className="table table-striped">
         <thead>
             <tr>
             <th>#</th>

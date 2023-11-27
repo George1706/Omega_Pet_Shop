@@ -10,10 +10,12 @@ import { Link } from "react-router-dom";
 const ProyectosAdmin = () => {
 
     const [tiendas, setProyectos] = useState([]);
+    const tiendasId = localStorage.getItem("id");
 
     const cargarTiendas = async () => {
         try {
-            var response = await APIInvoke.invokeGET('/tiendas');
+        
+            var response = await APIInvoke.invokeGET(`/tiendas?tiendasId=${tiendasId}`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
@@ -25,7 +27,7 @@ const ProyectosAdmin = () => {
             console.error('Error al cargar los proyectos:', error);
         }
     };
-
+ 
     useEffect(() => {
         cargarTiendas();
     }, []);
@@ -33,9 +35,10 @@ const ProyectosAdmin = () => {
     const eliminarTienda = async (e, id) => {
         e.preventDefault();
         const verificarExistenciaTiendas = async (id) => {
+            const tiendasId = localStorage.getItem("id");
             try {
                 const response = await APIInvoke.invokeGET(
-                    `/Tiendas?id=${id}`
+                    `/tiendas?id=${id}`
                 );
                 if (response && response.length > 0) {
                     return true; 

@@ -16,13 +16,15 @@ const VerProductosPropios = () => {
     const [filtroCategoria, setFiltroCategoria] = useState("");
     const [productosFiltrados, setProductosFiltrados] = useState([]);
     const [filtroAplicado, setFiltroAplicado] = useState(false);
-    const [nombresProductos, setNombresProductos] = useState([]);
+    const [productosTienda, setProductosTienda] = useState([]);
+    const productosId = localStorage.getItem("id");
+    const categoriasId = localStorage.getItem("id");
     const cargarNombresProductos = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
+            const response = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
             if (Array.isArray(response) && response.length > 0) {
                 const nombres = response.map((producto) => producto.nombre);
-                setNombresProductos(nombres);
+                setProductosTienda(nombres);
             }
         } catch (error) {
             console.error('Error al cargar los nombres de los productos:', error);
@@ -31,7 +33,7 @@ const VerProductosPropios = () => {
     
     const cargarCategorias = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/categorias?idT=${idTienda}`);
+            const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
             if (Array.isArray(response) && response.length > 0) {
                 // Mapear categorías para tener un objeto con el formato ID -> Nombre
                 const categoriasMap = response.reduce((acc, cat) => {
@@ -83,7 +85,7 @@ const VerProductosPropios = () => {
     };
     const cargarProductos = async () => {
         try {
-            var response = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
+            var response = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
@@ -195,8 +197,8 @@ const VerProductosPropios = () => {
         </option>
     ))}
 </select>
-                        <button onClick={filtrarProductos}>Buscar</button>
-                        <button onClick={limpiarFiltro}>Limpiar</button>
+                        <button onClick={filtrarProductos} className="btn btn-sm btn-primary ml-2">Buscar</button>
+                        <button onClick={limpiarFiltro} className="btn btn-sm btn-danger ml-2">Limpiar</button>
                     </div>
                     <div className="card">
                         <div className="card-header">
@@ -210,7 +212,7 @@ const VerProductosPropios = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                        <table className="table table-bordered">
+                        <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th style={{ width: '15%' }}>#</th>

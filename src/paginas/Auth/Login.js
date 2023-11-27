@@ -46,6 +46,8 @@ const Login = () => {
             }
         };
 
+
+
         if(password.length < 6){
             const msg = "Contraseña demasiado corta (debe ser mayor a 6 caracteres)";
             swal({
@@ -64,6 +66,9 @@ const Login = () => {
             });
         }else{
             const usuarioExistente = await verificarExistenciaUsuario(email, password);
+            const jwt= usuarioExistente.id;
+
+            localStorage.setItem('id', jwt);
             const response = await APIInvoke.invokeGET(
                 `/Usuarios?email=${email}&password=${password}`
             );
@@ -93,6 +98,8 @@ const Login = () => {
             }
         }
     }
+   
+
 
 
     const onSubmit = (e) => {

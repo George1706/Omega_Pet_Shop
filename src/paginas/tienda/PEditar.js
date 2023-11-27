@@ -25,6 +25,7 @@ const PEditar = () => {
         direccion: direccionTienda,
         telefono: telefonoTienda,
         correo: correoTienda
+        
     });
 
     
@@ -44,13 +45,14 @@ const PEditar = () => {
     const editarTiendas = async() => {
         let arreglo = idTienda.split('@');
         const idT = arreglo[0];
-
+        const tiendasId = localStorage.getItem("id");
         const data = {
             id: idT,
             nombre: tienda.nombre,
             direccion:tienda.direccion,
             telefono:tienda.telefono,
             correo:tienda.correo,
+            tiendasId: tiendasId
         }
 
         const response = await APIInvoke.invokePUT(`/Tiendas/${idT}`, data);

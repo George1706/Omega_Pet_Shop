@@ -9,10 +9,10 @@ import { Link, useParams } from "react-router-dom";
 
 const TAdmin = () => {
 
-
     const [productos, setProductos] = useState([]);
     const [categorias, setCategorias] = useState({});
 
+    const productosId = localStorage.getItem("id");
     const { idProyecto } = useParams();
     let arreglo = idProyecto.split('@')
     const idTienda = arreglo[0]
@@ -21,7 +21,7 @@ const TAdmin = () => {
 
     const cargarProductos = async () => {
         try {
-            const responseProductos = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
+            const responseProductos = await APIInvoke.invokeGET(`/productos?productosId=${idTienda}`);
             console.log('Respuesta de la API (Productos):', responseProductos);
 
             const responseCategorias = await APIInvoke.invokeGET('/categorias');
@@ -65,7 +65,6 @@ const TAdmin = () => {
         };
 
         const productoExistente = await verificarExistenciaTarea(idProducto);
-
         if (productoExistente) {
             const response = await APIInvoke.invokeDELETE(`/productos/${idProducto}?idT=${idTienda}`);
             const msg = "Producto Eliminado Correctamente";

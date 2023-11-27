@@ -18,7 +18,19 @@ const PCrear = () => {
     })
 
     const {nombre, direccion, telefono, correo}=tiendas;
-
+    const tiendasId = localStorage.getItem("id");
+    
+    const cargarUsuariosPorId = async () => {
+      try {
+        const response = await APIInvoke.invokeGET(`/Usuarios?id=${tiendasId}`);
+        setTiendas(response);
+      } catch (error) {
+        console.error("Error a cargar el usuario", error);
+      }
+    };
+    useEffect(() =>{
+      cargarUsuariosPorId();
+    }, [])
 
     const onChange=(e)=>{
         setTiendas({
@@ -32,13 +44,15 @@ const PCrear = () => {
     }, [])
 
     const crearProyecto = async () =>{
+        const tiendasId = localStorage.getItem("id");
         const data ={
             nombre: tiendas.nombre,
-            direccion:tiendas.direccion,
-            telefono:tiendas.telefono,
-            correo:tiendas.correo
+            direccion: tiendas.direccion,
+            telefono: tiendas.telefono,
+            correo: tiendas.correo,
+            tiendasId: tiendasId
         }
-        const response = await APIInvoke.invokePOST('/Tiendas', data);
+        const response = await APIInvoke.invokePOST(`/Tiendas`, data);
         const idProyecto = response.id;
 
         if (idProyecto==="nombre"){

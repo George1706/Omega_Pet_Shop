@@ -10,12 +10,12 @@ import { useEffect, useState } from "react";
 
 const VerCategorias = () => {
     const [ventas, setVentas] = useState([]);
-
+    const categoriasId = localStorage.getItem("id");
 
 
     const cargarCategorias = async () => {
         try {
-            var response = await APIInvoke.invokeGET(`/categorias`);
+            var response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
             console.log('Respuesta de la API:', response); // Verifica la respuesta de la API
 
             if (Array.isArray(response) && response.length > 0) {

@@ -58,6 +58,22 @@
       "password": "123456",
       "rol": "administrador",
       "id": 7
+    },
+    {
+      "nombre": "jose",
+      "email": "jose@gmail.com",
+      "telefono": "323232",
+      "password": "jose123456",
+      "rol": "administrador",
+      "id": 8
+    },
+    {
+      "nombre": "Narly",
+      "email": "narly@gmail.com",
+      "telefono": "32433532",
+      "password": "Narly1234",
+      "rol": "administrador",
+      "id": 9
     }
   ],
   "Categorias": [
@@ -68,22 +84,31 @@
     {
       "nombre": "Accesorios",
       "id": 2
+    },
+    {
+      "nombre": "PAPAS",
+      "categoriasId": "1",
+      "id": 3
+    },
+    {
+      "nombre": "fdfdf",
+      "categoriasId": "1",
+      "id": 4
+    },
+    {
+      "nombre": "ttttt",
+      "categoriasId": "8",
+      "id": 5
     }
   ],
   "Tiendas": [
     {
-      "id": 1,
-      "nombre": "CatsAndDogs",
-      "direccion": "calle34 Bis 67",
-      "telefono": "3225678907",
-      "correo": "huellas@gmail.com"
-    },
-    {
-      "nombre": "Perricatss",
-      "direccion": "diagonal 69 sur",
-      "telefono": "3124018772",
-      "correo": "jorge.pineda820@educacionbogota.edu.co",
-      "id": 2
+      "nombre": "Cats",
+      "direccion": "calle 56 -78 ",
+      "telefono": "3245678903",
+      "correo": "cats@gmail.com",
+      "tiendasId": "1",
+      "id": 1
     }
   ],
   "Ventas": [
@@ -93,7 +118,7 @@
       "categoriap": "Comida",
       "nombre": "Bibi",
       "direccion": "calle34 B ",
-      "telefono": "undefined",
+      "telefono": "354343434",
       "id": 1
     },
     {
@@ -211,6 +236,15 @@
       "idC": "2",
       "descripcion": "qwdsdsadsad",
       "id": 4
+    },
+    {
+      "id": 5,
+      "idT": "7",
+      "nombre": "fsdfsfdsf",
+      "precio": "24242424",
+      "idC": "4",
+      "descripcion": "sfddfdgfd",
+      "estado": false
     }
   ]
 }
