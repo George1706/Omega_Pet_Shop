@@ -15,14 +15,14 @@ const VerPedidos = () => {
     const ventasId = localStorage.getItem("id");
     const cargarPedidos = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/ventas?ventasId=${ventasId}`);
+            const response = await APIInvoke.invokeGET(`/ventas?id=${ventasId}`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
                 // Actualizar los detalles de producto y categoría antes de actualizar el estado
                 const ventasConDetalles = await Promise.all(
                     response.map(async (venta) => {
-                        const productos = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);
+                        const productos = await APIInvoke.invokeGET(`/productos?productosid=${productosId}`);
                         const categoria = await APIInvoke.invokeGET(`/categorias?categoriasId${categoriasId}`);
                         
                         return {
@@ -50,7 +50,7 @@ const VerPedidos = () => {
     const obtenerProductoCategoria = async (venta) => {
         try {
             // Obtener el producto
-            const productos = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
+            const productos = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);
             // Obtener la categoría
             const categoria = await APIInvoke.invokeGET(`/categorias?categoriasId${categoriasId}`);
 

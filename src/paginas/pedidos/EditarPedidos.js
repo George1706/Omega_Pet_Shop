@@ -13,11 +13,13 @@ const EditarPedidos = () => {
     const navigate = useNavigate();
     const [productos, setProductos] = useState([]);
     const [categorias, setCategorias] = useState([]);
+    const productosId = localStorage.getItem("id");
+    const categoriasId = localStorage.getItem("id");
 
     // Función para obtener productos desde la API
     const obtenerProductos = async () => {
         try {
-            const response = await APIInvoke.invokeGET('/productos');
+            const response = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);  
             setProductos(response); // Actualizar el estado con los productos obtenidos
         } catch (error) {
             console.error('Error al obtener productos:', error);
@@ -27,7 +29,7 @@ const EditarPedidos = () => {
     // Función para obtener categorías desde la API
     const obtenerCategorias = async () => {
         try {
-            const response = await APIInvoke.invokeGET('/categorias');
+            const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
             setCategorias(response); // Actualizar el estado con las categorías obtenidas
         } catch (error) {
             console.error('Error al obtener categorías:', error);

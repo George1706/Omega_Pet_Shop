@@ -46,7 +46,7 @@ const CrearCategoria = () => {
             nombre: categorias.nombre,
             categoriasId: categoriasId
         }
-        const response = await APIInvoke.invokePOST('/Categorias', data);
+        const response = await APIInvoke.invokePOST('/categorias', data);
         const idCategoria = response.id;
 
         if (idCategoria===""){

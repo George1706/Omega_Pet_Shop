@@ -22,7 +22,7 @@ const PCrear = () => {
     
     const cargarUsuariosPorId = async () => {
       try {
-        const response = await APIInvoke.invokeGET(`/Usuarios?id=${tiendasId}`);
+        const response = await APIInvoke.invokeGET(`/usuarios?id=${tiendasId}`);
         setTiendas(response);
       } catch (error) {
         console.error("Error a cargar el usuario", error);
@@ -52,7 +52,7 @@ const PCrear = () => {
             correo: tiendas.correo,
             tiendasId: tiendasId
         }
-        const response = await APIInvoke.invokePOST(`/Tiendas`, data);
+        const response = await APIInvoke.invokePOST(`/tiendas?id=${tiendasId}`, data);
         const idProyecto = response.id;
 
         if (idProyecto==="nombre"){

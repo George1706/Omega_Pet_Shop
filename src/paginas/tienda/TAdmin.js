@@ -12,7 +12,10 @@ const TAdmin = () => {
     const [productos, setProductos] = useState([]);
     const [categorias, setCategorias] = useState({});
 
+    
     const productosId = localStorage.getItem("id");
+    const categoriasId = localStorage.getItem("id");
+    
     const { idProyecto } = useParams();
     let arreglo = idProyecto.split('@')
     const idTienda = arreglo[0]
@@ -21,10 +24,10 @@ const TAdmin = () => {
 
     const cargarProductos = async () => {
         try {
-            const responseProductos = await APIInvoke.invokeGET(`/productos?productosId=${idTienda}`);
+            const responseProductos = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);
             console.log('Respuesta de la API (Productos):', responseProductos);
 
-            const responseCategorias = await APIInvoke.invokeGET('/categorias');
+            const responseCategorias = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
             console.log('Respuesta de la API (Categorías):', responseCategorias);
 
             if (Array.isArray(responseProductos) && responseProductos.length > 0) {

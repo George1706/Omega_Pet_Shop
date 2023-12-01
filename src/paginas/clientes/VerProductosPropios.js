@@ -17,11 +17,25 @@ const VerProductosPropios = () => {
     const [productosFiltrados, setProductosFiltrados] = useState([]);
     const [filtroAplicado, setFiltroAplicado] = useState(false);
     const [productosTienda, setProductosTienda] = useState([]);
+    const [categoriasTienda, setCategoriasTienda] = useState([]);
     const productosId = localStorage.getItem("id");
     const categoriasId = localStorage.getItem("id");
+
+    const cargarCategoriasPorTienda = async (idTienda) => {
+        try {
+            const response = await APIInvoke.invokeGET(`/categorias?idT=${idTienda}`);
+            if (Array.isArray(response) && response.length > 0) {
+                // Filtrar las categorías por tienda
+                setCategoriasTienda(response.map((cat) => cat.nombre));
+            }
+        } catch (error) {
+            console.error('Error al cargar las categorías por tienda:', error);
+        }
+    };
+    
     const cargarNombresProductos = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
+            const response = await APIInvoke.invokeGET(`/productos?productosId=${productosId}`);
             if (Array.isArray(response) && response.length > 0) {
                 const nombres = response.map((producto) => producto.nombre);
                 setProductosTienda(nombres);
@@ -33,7 +47,7 @@ const VerProductosPropios = () => {
     
     const cargarCategorias = async () => {
         try {
-            const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
+            const response = await APIInvoke.invokeGET(`/categorias?idT=${categoriasId}`);
             if (Array.isArray(response) && response.length > 0) {
                 // Mapear categorías para tener un objeto con el formato ID -> Nombre
                 const categoriasMap = response.reduce((acc, cat) => {
@@ -50,6 +64,7 @@ const VerProductosPropios = () => {
         cargarProductos();
         cargarCategorias();
         cargarNombresProductos();
+        cargarCategoriasPorTienda();
     }, []);
 
     const { idProyecto } = useParams();
@@ -58,24 +73,24 @@ const VerProductosPropios = () => {
     const nombreTienda = arreglo[1]
     const tituloPag = `Listado de productos: ${nombreTienda}`
 
-    const filtrarProductos = () => {
-        let productosFiltradosTemp = [...productos];
+const filtrarProductos = () => {
+    let productosFiltradosTemp = [...productosTienda];
 
-        if (filtroNombre) {
-            productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
-                producto.nombre.toLowerCase().includes(filtroNombre.toLowerCase())
-            );
-        }
+    if (filtroNombre) {
+        productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
+            producto.nombre.toLowerCase().includes(filtroNombre.toLowerCase())
+        );
+    }
 
-        if (filtroCategoria) {
-            productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
-                categorias[producto.idC]?.toLowerCase() === filtroCategoria.toLowerCase()
-            );
-        }
+    if (filtroCategoria) {
+        productosFiltradosTemp = productosFiltradosTemp.filter((producto) =>
+            producto.categoria.nombre.toLowerCase() === filtroCategoria.toLowerCase()
+        );
+    }
 
-        setProductosFiltrados(productosFiltradosTemp);
-        setFiltroAplicado(true);
-    };
+    setProductosFiltrados(productosFiltradosTemp);
+    setFiltroAplicado(true);
+};
 
     const limpiarFiltro = () => {
         setFiltroNombre("");
@@ -83,20 +98,20 @@ const VerProductosPropios = () => {
         setProductosFiltrados([]);
         setFiltroAplicado(false);
     };
-    const cargarProductos = async () => {
-        try {
-            var response = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
-            console.log('Respuesta de la API:', response); 
+const cargarProductos = async () => {
+    try {
+        const response = await APIInvoke.invokeGET(`/productos?idT=${idTienda}`);
+        console.log('Respuesta de la API:', response); 
 
-            if (Array.isArray(response) && response.length > 0) {
-                setProductos(response);
-            } else {
-                console.error('La respuesta de la API no contiene proyectos.');
-            }
-        } catch (error) {
-            console.error('Error al cargar los proyectos:', error);
+        if (Array.isArray(response) && response.length > 0) {
+            setProductos(response);
+        } else {
+            console.error('La respuesta de la API no contiene productos para esta tienda.');
         }
-    };
+    } catch (error) {
+        console.error('Error al cargar los productos:', error);
+    }
+};
 
     useEffect(() => {
         cargarProductos();
@@ -187,16 +202,16 @@ const VerProductosPropios = () => {
 </select>
 
 <select
-    value={filtroCategoria}
-    onChange={(e) => setFiltroCategoria(e.target.value)}
->
-    <option value="">Selecciona una categoría</option>
-    {Object.values(categorias).map((categoria, index) => (
-        <option key={index} value={categoria}>
-            {categoria}
-        </option>
-    ))}
-</select>
+                value={filtroCategoria}
+                onChange={(e) => setFiltroCategoria(e.target.value)}
+            >
+                <option value="">Selecciona una categoría</option>
+                {categoriasTienda.map((categoria, index) => (
+                    <option key={index} value={categoria}>
+                        {categoria}
+                    </option>
+                ))}
+            </select>
                         <button onClick={filtrarProductos} className="btn btn-sm btn-primary ml-2">Buscar</button>
                         <button onClick={limpiarFiltro} className="btn btn-sm btn-danger ml-2">Limpiar</button>
                     </div>

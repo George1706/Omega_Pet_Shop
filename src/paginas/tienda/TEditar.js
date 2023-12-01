@@ -62,11 +62,11 @@ const TEditar = () => {
             precio:productos.precio,
             idC:productos.idC,
             descripcion:productos.descripcion,
-            estado: false
+            productosId:productosId
         }
 
         console.log(data)
-        const response = await APIInvoke.invokePUT(`/productos/${idProducto}`, data);
+        const response = await APIInvoke.invokePUT(`/productos?id=${productosId}`, data);
         const idTareaEditado = response.id;
 
         if (idTareaEditado !== idProducto) {
@@ -116,7 +116,8 @@ const TEditar = () => {
         // Lógica para obtener las categorías de tu API o de donde las tengas almacenadas
         const obtenerCategorias = async () => {
             try {
-                const response = await APIInvoke.invokeGET('/categorias'); // Reemplaza '/categorias' por tu endpoint correcto
+                const categoriasId = localStorage.getItem("id");
+                const response = await APIInvoke.invokeGET(`/categorias?id=${categoriasId}`); // Reemplaza '/categorias' por tu endpoint correcto
                 setCategorias(response); // Actualizar el estado con las categorías obtenidas
             } catch (error) {
                 console.error('Error al obtener las categorías:', error);

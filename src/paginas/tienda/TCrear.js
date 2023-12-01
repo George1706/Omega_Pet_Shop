@@ -16,15 +16,13 @@ const TCrear = () => {
 
     const [productos, setProductos] = useState({
         nombre: '',
-        precio:'',
-        idT:'',
-        idC:'',
-        descripcion:''
-    })
+        precio: '',
+        idT: '',
+        idC: '',
+        descripcion: ''
+    });
 
-    const { nombre, precio , idC, descripcion} = productos;
-
-
+    const { nombre, precio, idC, descripcion } = productos;
 
     const { idProyecto } = useParams();
     let arreglo = idProyecto.split('@')
@@ -32,86 +30,107 @@ const TCrear = () => {
     const nombreTienda = arreglo[1]
     const tituloPag = `Crear productos en: ${nombreTienda}`
 
-
     useEffect(() => {
-        document.getElementById("nombre").focus();
-    }, [])
-
+        document.getElementById("nombre")?.focus(); // Validar la existencia del elemento antes de acceder a él
+    }, []);
 
     const onChange = (e) => {
         setProductos({
             ...productos,
             [e.target.name]: e.target.value
-        })
-
-    }
+        });
+    };
 
     const crearTarea = async () => {
-
+        const productosId = localStorage.getItem("id");
         const data = {
             idT: idTienda,
-            nombre: productos.nombre,
-            precio:productos.precio,
-            idC:productos.idC,
-            descripcion:productos.descripcion
-        }
+            nombre: nombre,
+            precio: precio,
+            idC: idC,
+            descripcion: descripcion,
+            productosId: productosId
+        };
 
-        const response = await APIInvoke.invokePOST('/productos', data);
-        const idTarea = response.id;
+        try {
+            const response = await APIInvoke.invokePOST(`/productos?id=${productosId}`, data);
+            const idTarea = response?.id || ''; // Validar si response tiene un id
 
-        if (idTarea === '') {
-            const msg = "El producto no fue creado correctamente";
-            new swal({
-                title: 'Error',
-                text: msg,
-                icon: 'error',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-danger',
-                        closeModal: true
+            if (!idTarea) {
+                const msg = "El producto no fue creado correctamente";
+                new swal({
+                    title: 'Error',
+                    text: msg,
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-danger',
+                            closeModal: true
+                        }
                     }
-                }
-            });
-        } else {
-            navigate(`/TAdmin/${idTienda}@${nombreTienda}`)
-            const msg = "El producto fue creado correctamente";
-            new swal({
-                title: 'Información',
-                text: msg,
-                icon: 'success',
-                buttons: {
-                    confirm: {
-                        text: 'Ok',
-                        value: true,
-                        visible: true,
-                        className: 'btn btn-primary',
-                        closeModal: true
+                });
+            } else {
+                navigate(`/TAdmin/${idTienda}@${nombreTienda}`)
+                const msg = "El producto fue creado correctamente";
+                new swal({
+                    title: 'Información',
+                    text: msg,
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: 'Ok',
+                            value: true,
+                            visible: true,
+                            className: 'btn btn-primary',
+                            closeModal: true
+                        }
                     }
-                }
-            });
-
+                });
+            }
+        } catch (error) {
+            console.error('Error al crear el producto:', error);
         }
-    }
+    };
+
     const [categorias, setCategorias] = useState([]); // Agregar estado para almacenar las categorías
     const onSubmit = (e) => {
         e.preventDefault();
-        crearTarea()
-    }
+        crearTarea();
+    };
+
     useEffect(() => {
-        // Lógica para obtener las categorías de tu API o de donde las tengas almacenadas
         const obtenerCategorias = async () => {
             try {
-                const response = await APIInvoke.invokeGET('/categorias'); // Reemplaza '/categorias' por tu endpoint correcto
-                setCategorias(response); // Actualizar el estado con las categorías obtenidas
+                const categoriasId = localStorage.getItem("id");
+                const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
+                
+                // Verificar la respuesta de la API en la consola
+                console.log("Respuesta de la API de categorías:", response);
+    
+                if (response && Array.isArray(response)) {
+                    // Verificar si la respuesta contiene datos y es un array
+                    if (response.length > 0) {
+                        // Verificar la estructura de las categorías
+                        console.log("Estructura de categorías:", response[0]);
+                    } else {
+                        console.log("La respuesta de categorías está vacía.");
+                    }
+                    
+                    // Actualizar el estado con las categorías obtenidas o un array vacío si la respuesta es nula
+                    setCategorias(response);
+                } else {
+                    console.log("La respuesta de categorías no es un array o está vacía.");
+                    setCategorias([]); // Asignar un array vacío para evitar problemas de renderizado
+                }
             } catch (error) {
                 console.error('Error al obtener las categorías:', error);
             }
         };
     
-        obtenerCategorias(); // Llamar a la función para obtener las categorías al cargar el componente
+        obtenerCategorias();
     }, []);
     return (
         <div className="wrapper">

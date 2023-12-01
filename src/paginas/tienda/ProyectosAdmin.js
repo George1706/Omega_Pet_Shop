@@ -15,7 +15,7 @@ const ProyectosAdmin = () => {
     const cargarTiendas = async () => {
         try {
         
-            var response = await APIInvoke.invokeGET(`/tiendas?tiendasId=${tiendasId}`);
+            const response = await APIInvoke.invokeGET(`/tiendas?tiendasId=${tiendasId}`);
             console.log('Respuesta de la API:', response); 
 
             if (Array.isArray(response) && response.length > 0) {
@@ -31,10 +31,29 @@ const ProyectosAdmin = () => {
     useEffect(() => {
         cargarTiendas();
     }, []);
+    
+    const eliminarProductosDeTienda = async (idTienda) => {
+        try {
+            const response = await APIInvoke.invokeGET(`/productos?tiendasId=${idTienda}`);
+            const productosAEliminar = response || [];
+            
+            for (const producto of productosAEliminar) {
+                await APIInvoke.invokeDELETE(`/productos/${producto.id}`);
+            }
+        
+            console.log('Productos de la tienda eliminados:', productosAEliminar);
+            return true; // Devolvemos true si la eliminación de productos fue exitosa
+        } catch (error) {
+            console.error('Error al eliminar productos de la tienda:', error);
+            return false; // Devolvemos false si hubo un error en la eliminación de productos
+        }
+    };
 
     const eliminarTienda = async (e, id) => {
         e.preventDefault();
         const verificarExistenciaTiendas = async (id) => {
+
+            
             const tiendasId = localStorage.getItem("id");
             try {
                 const response = await APIInvoke.invokeGET(
@@ -51,25 +70,52 @@ const ProyectosAdmin = () => {
         };
 
         const tiendaExistente = await verificarExistenciaTiendas(id);
-
-        if (tiendaExistente) {
-            const response = await APIInvoke.invokeDELETE(`/Tiendas/${id}`);
-            const msg = "Tienda Eliminada Correctamente";
+        const mostrarMensajeError = () => {
             new swal({
-                title: "Informacion",
-                text: msg,
-                icon: "success",
+                title: "Error",
+                text: "Error al eliminar la tienda",
+                icon: "error",
                 buttons: {
                     confirmar: {
                         text: "Ok",
                         value: true,
                         visible: true,
-                        className: "btn btn-prymari",
+                        className: "btn btn-danger",
                         closeModal: true,
                     },
                 },
             });
-            cargarTiendas();
+        };
+
+        if (tiendaExistente) {
+            const productosEliminados = await eliminarProductosDeTienda(id);
+
+            if (productosEliminados) {
+                try {
+                    const response = await APIInvoke.invokeDELETE(`/Tiendas/${id}`);
+                    const msg = "Tienda Eliminada Correctamente";
+                    new swal({
+                        title: "Informacion",
+                        text: msg,
+                        icon: "success",
+                        buttons: {
+                            confirmar: {
+                                text: "Ok",
+                                value: true,
+                                visible: true,
+                                className: "btn btn-prymari",
+                                closeModal: true,
+                            },
+                        },
+                    });
+                    cargarTiendas();
+                } catch (error) {
+                    console.error('Error al eliminar la tienda:', error);
+                    mostrarMensajeError();
+                }
+            } else {
+                mostrarMensajeError();
+            }
         } else {
             const msg = "La Tienda No Se Pudo Eliminar";
             new swal({
@@ -87,8 +133,8 @@ const ProyectosAdmin = () => {
                 },
             });
         }
-    }
-
+    };
+    
     return (
         <div className="wrapper">
             <Navbar></Navbar>

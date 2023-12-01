@@ -74,48 +74,51 @@
       "password": "Narly1234",
       "rol": "administrador",
       "id": 9
+    },
+    {
+      "nombre": "lulu",
+      "direccion": "calasdls",
+      "telefono": "2324234",
+      "correo": "sdsd@dsdsd.com",
+      "tiendasId": "4",
+      "id": 10
     }
   ],
   "Categorias": [
     {
-      "nombre": "Comida",
+      "nombre": "M1",
+      "categoriasId": "4",
       "id": 1
     },
     {
-      "nombre": "Accesorios",
+      "nombre": "J1",
+      "categoriasId": "1",
       "id": 2
-    },
-    {
-      "nombre": "PAPAS",
-      "categoriasId": "1",
-      "id": 3
-    },
-    {
-      "nombre": "fdfdf",
-      "categoriasId": "1",
-      "id": 4
-    },
-    {
-      "nombre": "ttttt",
-      "categoriasId": "8",
-      "id": 5
     }
   ],
   "Tiendas": [
     {
       "nombre": "Cats",
-      "direccion": "calle 56 -78 ",
-      "telefono": "3245678903",
+      "direccion": "CALLE 100",
+      "telefono": "3214781761",
       "correo": "cats@gmail.com",
-      "tiendasId": "1",
+      "tiendasId": "4",
       "id": 1
+    },
+    {
+      "nombre": "Dogs",
+      "direccion": "calle 50",
+      "telefono": "56871821",
+      "correo": "dogs@gmail.com",
+      "tiendasId": "1",
+      "id": 2
     }
   ],
   "Ventas": [
     {
       "idP": "1",
-      "nombreProd": "Dogumert Comida",
-      "categoriap": "Comida",
+      "nombreProd": "undefined",
+      "categoriap": "undefined",
       "nombre": "Bibi",
       "direccion": "calle34 B ",
       "telefono": "354343434",
@@ -204,47 +207,22 @@
   ],
   "Productos": [
     {
-      "id": 1,
       "idT": "1",
-      "nombre": "Dogumert Comida",
-      "precio": "500000",
+      "nombre": "Dogurmet Adulto",
+      "precio": "340000",
       "idC": "1",
-      "descripcion": "rico",
-      "estado": false
-    },
-    {
-      "id": 2,
-      "idT": "1",
-      "nombre": "Cama Perro",
-      "precio": "10000",
-      "idC": "2",
-      "descripcion": "grande",
-      "estado": false
-    },
-    {
-      "idT": "1",
-      "nombre": "Pelota Gato",
-      "precio": "23000",
-      "idC": "2",
-      "descripcion": "Redonda",
+      "descripcion": "Comida adulto",
+      "productosId": "4",
       "id": 3
     },
     {
       "idT": "2",
-      "nombre": "Cama robusta",
-      "precio": "3423233232",
+      "nombre": "Dogchow Cachorro",
+      "precio": "34322",
       "idC": "2",
-      "descripcion": "qwdsdsadsad",
+      "descripcion": "comida cachorro",
+      "productosId": "1",
       "id": 4
-    },
-    {
-      "id": 5,
-      "idT": "7",
-      "nombre": "fsdfsfdsf",
-      "precio": "24242424",
-      "idC": "4",
-      "descripcion": "sfddfdgfd",
-      "estado": false
     }
   ]
 }
