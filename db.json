@@ -3,226 +3,72 @@
     {
       "nombre": "Jorge",
       "email": "jpinedacare@gmail.com",
-      "nit": "",
       "telefono": "3214781761",
-      "password": "Jorge123456",
-      "rol": "administrador",
+      "password": "123456",
+      "rol": "cliente",
       "id": 1
-    },
-    {
-      "nombre": "Jorge Jaird",
-      "email": "jp728476@gmail.com",
-      "nit": "",
-      "telefono": "3124018772",
-      "password": "Jorgejaird123456",
-      "rol": "cliente",
-      "id": 2
-    },
-    {
-      "nombre": "Jaird Pineda",
-      "email": "jaird@live.com",
-      "nit": "",
-      "telefono": "3245678903",
-      "password": "Jorge123",
-      "rol": "cliente",
-      "id": 3
-    },
-    {
-      "nombre": "Maria del Carmen Pineda Care",
-      "email": "mp0765891@gmail.com",
-      "telefono": "3124018772",
-      "password": "Maria123456",
-      "rol": "administrador",
-      "id": 4
-    },
-    {
-      "nombre": "Jorge Pineda Care",
-      "email": "jorgepineda12@gmail.com",
-      "telefono": "1241234243",
-      "password": "123456",
-      "rol": "administrador",
-      "id": 5
-    },
-    {
-      "nombre": "Laura Trigo",
-      "email": "lautrigo@gmail.com",
-      "telefono": "242423232",
-      "password": "222222",
-      "rol": "administrador",
-      "id": 6
-    },
-    {
-      "nombre": "Jorge",
-      "email": "jpinedacare@gmail.com",
-      "telefono": "3214781761",
-      "password": "123456",
-      "rol": "administrador",
-      "id": 7
-    },
-    {
-      "nombre": "jose",
-      "email": "jose@gmail.com",
-      "telefono": "323232",
-      "password": "jose123456",
-      "rol": "administrador",
-      "id": 8
     },
     {
       "nombre": "Narly",
       "email": "narly@gmail.com",
-      "telefono": "32433532",
-      "password": "Narly1234",
+      "telefono": "323232",
+      "password": "123456",
       "rol": "administrador",
-      "id": 9
+      "id": 2
     },
     {
-      "nombre": "lulu",
-      "direccion": "calasdls",
-      "telefono": "2324234",
-      "correo": "sdsd@dsdsd.com",
-      "tiendasId": "4",
-      "id": 10
+      "nombre": "Maria",
+      "email": "maria@gmail.com",
+      "telefono": "3124018772",
+      "password": "123456",
+      "rol": "administrador",
+      "id": 3
     }
   ],
   "Categorias": [
     {
-      "nombre": "M1",
-      "categoriasId": "4",
+      "nombre": "Comida",
+      "categoriasId": "2",
       "id": 1
     },
     {
-      "nombre": "J1",
-      "categoriasId": "1",
+      "nombre": "Accesorios",
+      "categoriasId": "2",
       "id": 2
     }
   ],
   "Tiendas": [
     {
-      "nombre": "Cats",
-      "direccion": "CALLE 100",
-      "telefono": "3214781761",
-      "correo": "cats@gmail.com",
-      "tiendasId": "4",
+      "nombre": "Perros y gatos",
+      "direccion": "calle 100 ",
+      "telefono": "322121322",
+      "correo": "narly@gmail.com",
+      "tiendasId": "2",
       "id": 1
-    },
-    {
-      "nombre": "Dogs",
-      "direccion": "calle 50",
-      "telefono": "56871821",
-      "correo": "dogs@gmail.com",
-      "tiendasId": "1",
-      "id": 2
     }
   ],
   "Ventas": [
     {
       "idP": "1",
-      "nombreProd": "undefined",
-      "categoriap": "undefined",
-      "nombre": "Bibi",
-      "direccion": "calle34 B ",
-      "telefono": "354343434",
+      "nombreProd": "Perros y gatos",
+      "nombre": "Jorge Pineda",
+      "direccion": "callle 45",
+      "telefono": "3214781761",
+      "categoria": "2",
+      "pedidoId": "1",
       "id": 1
-    },
-    {
-      "idP": "1",
-      "nombreProd": "Dogumert Comida",
-      "categoriap": "Comida",
-      "nombre": "Jorge fdsdwr",
-      "direccion": "carrera 93 B weweew",
-      "telefono": "454453434",
-      "id": 2
-    },
-    {
-      "idP": "2",
-      "nombreProd": "Perricatss",
-      "nombre": "Jorge",
-      "direccion": "carrera 45 67 68",
-      "telefono": "3234567890",
-      "id": 3
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Jorge",
-      "direccion": "calle34 B # 32 - A 78",
-      "telefono": "3124018772",
-      "categoria": "1",
-      "id": 4
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Jorge Jaird",
-      "direccion": "carrera 93 B # 130 A 56",
-      "telefono": "3225678907",
-      "categoria": "1",
-      "id": 5
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Maria",
-      "direccion": "carrera 93 B # 130 A 56",
-      "telefono": "3225678907",
-      "categoria": "2",
-      "id": 6
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Sara",
-      "direccion": "calle34 Bis 67",
-      "telefono": "3225678907",
-      "categoria": "2",
-      "id": 7
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Jorge",
-      "direccion": "calle 67 - 78",
-      "telefono": "3214781761",
-      "categoria": "1",
-      "id": 8
-    },
-    {
-      "idP": "1",
-      "nombreProd": "CatsAndDogs",
-      "nombre": "Jaird",
-      "direccion": "carrera 93 B # 130 A - 54",
-      "telefono": "3214781761",
-      "categoria": "1",
-      "id": 9
-    },
-    {
-      "idP": "1",
-      "nombreProd": "Dogumert Comida",
-      "categoriap": "Comida",
-      "nombre": "Jaird",
-      "direccion": "carrera 93 B ",
-      "telefono": "23232323",
-      "id": 10
     }
   ],
   "Productos": [
     {
       "idT": "1",
-      "nombre": "Dogurmet Adulto",
-      "precio": "340000",
+      "nombre": "Dowchow Adulto",
+      "precio": "12000",
       "idC": "1",
-      "descripcion": "Comida adulto",
-      "productosId": "4",
-      "id": 3
-    },
-    {
-      "idT": "2",
-      "nombre": "Dogchow Cachorro",
-      "precio": "34322",
-      "idC": "2",
-      "descripcion": "comida cachorro",
-      "productosId": "1",
-      "id": 4
+      "descripcion": "comida adulto",
+      "productosId": "2",
+      "categoriasId": "2",
+      "id": 1
     }
   ]
 }

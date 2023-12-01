@@ -12,7 +12,8 @@ import VerTiendasClientes from './paginas/tienda/VerTiendas';
 import VerCategoria from './paginas/categoria/VerCategoria';
 import CrearCategoria from './paginas/categoria/CrearCategoria';
 import EditarCategoria from './paginas/categoria/EditarCategoria';
-import VerPedidos from './paginas/pedidos/VerPedidos';
+import VerPedidos from './paginas/clientes/VerPedidos';
+import VerPedidos1 from './paginas/pedidos/VerPedidos1';
 import TAdmin from './paginas/tienda/TAdmin';
 import TCrear from './paginas/tienda/TCrear';
 import TEditar from './paginas/tienda/TEditar';
@@ -41,6 +42,7 @@ function App() {
           <Route path='/CrearCategorias' exact element = {<CrearCategoria/>}/>
           <Route path="/EditarCategorias/:idCategoria" exact element={<EditarCategoria/>}/>
           <Route path="/VerPedidos" exact element={<VerPedidos/>}/>
+          <Route path="/VerPedidos1" exact element={<VerPedidos1/>}/>
           <Route path="/EditarPedidos/:idPedido" exact element={<EditarPedidos/>}/>
           <Route path="/TAdmin/:idProyecto" exact element={<TAdmin/>}/>
           <Route path="/TCrear/:idProyecto" exact element={<TCrear/>}/>

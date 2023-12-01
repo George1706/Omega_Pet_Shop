@@ -26,6 +26,7 @@ const TEditar = () => {
     const tituloPag = `Actualización de productos: ${nombreTienda}`
 
     const productosId = localStorage.getItem("id");
+    const categoriasId = localStorage.getItem("id");
     const [productos, setproductos] = useState({
         id:idProducto,
         nombre: nombreProducto,
@@ -33,7 +34,8 @@ const TEditar = () => {
         idT:idTienda,
         idC:idCategoria,
         descripcion:descripProd,
-        productosId:productosId
+        productosId:productosId,
+        categoriasId:categoriasId
     })
 
     const { nombre, precio, idC, descripcion} = productos;
@@ -62,7 +64,8 @@ const TEditar = () => {
             precio:productos.precio,
             idC:productos.idC,
             descripcion:productos.descripcion,
-            productosId:productosId
+            productosId:productosId,
+            categoriasId:categoriasId
         }
 
         console.log(data)
@@ -117,7 +120,7 @@ const TEditar = () => {
         const obtenerCategorias = async () => {
             try {
                 const categoriasId = localStorage.getItem("id");
-                const response = await APIInvoke.invokeGET(`/categorias?id=${categoriasId}`); // Reemplaza '/categorias' por tu endpoint correcto
+                const response = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`); // Reemplaza '/categorias' por tu endpoint correcto
                 setCategorias(response); // Actualizar el estado con las categorías obtenidas
             } catch (error) {
                 console.error('Error al obtener las categorías:', error);

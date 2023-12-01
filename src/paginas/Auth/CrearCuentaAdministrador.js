@@ -156,7 +156,7 @@ const CrearCuentaAdministrador = () => {
             backgroundPosition: '0 0',
             transition: 'background-position 0.5s',
             textTransform: 'none',
-          }}>Crear Cuenta</b> Administrador
+          }}>Crear Cuenta</b> para tu Tienda
             </Link>
         </div>
        

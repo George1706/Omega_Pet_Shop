@@ -43,13 +43,15 @@ const TCrear = () => {
 
     const crearTarea = async () => {
         const productosId = localStorage.getItem("id");
+        const categoriasId = localStorage.getItem("id");
         const data = {
             idT: idTienda,
             nombre: nombre,
             precio: precio,
             idC: idC,
             descripcion: descripcion,
-            productosId: productosId
+            productosId: productosId,
+            categoriasId: categoriasId
         };
 
         try {

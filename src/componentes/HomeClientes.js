@@ -29,6 +29,12 @@ const HomeClientes=()=>{
                         </p>
                     </Link>
                 </li>
+                <li className="nav-item" style={listItemStyle}>
+                    <Link to={"/VerPedidos"} className="nav-link">
+                        <i className="nav-icon fas fa-truck" />
+                        <p>Ver Mis Pedidos</p>
+                    </Link>
+                </li>
             </ul>
         </nav>
 

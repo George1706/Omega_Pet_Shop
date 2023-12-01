@@ -50,7 +50,7 @@ useEffect(() => {
   const fetchTiendaData = async () => {
     try {
       const productosResponse = await APIInvoke.invokeGET(`/productos?idT=${productosId}`);
-      const categoriasResponse = await APIInvoke.invokeGET(`/categorias?categoriasId=${categoriasId}`);
+      const categoriasResponse = await APIInvoke.invokeGET(`/categorias?idT=${categoriasId}`);
 
       if (Array.isArray(productosResponse) && productosResponse.length > 0) {
         setProductosTienda(productosResponse);
@@ -65,7 +65,7 @@ useEffect(() => {
   };
 
   fetchTiendaData();
-}, [idTienda]);
+}, []);
 useEffect(() => {
     document.getElementById("nombre").focus();
 }, [])

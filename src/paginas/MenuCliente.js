@@ -7,6 +7,7 @@ import Footer from "../componentes/Footer";
 import SidebarContainerClientes from "../componentes/SidebarContainerClientes";
 import "../css/menu.css"
 const MenuClientes = () => {
+    
     return (
     <div className="wrapper">
         <Navbar></Navbar>
@@ -35,6 +36,20 @@ const MenuClientes = () => {
                     </Link>
                 </div>
                 </div>
+                <div className="col-lg-7 col-8">
+                <div className="small-box bg-rosado-clarito">
+                  <div className="inner">
+                    <h3>Pedidos</h3>
+                    <p>&nbsp;</p>
+                  </div>
+                  <div className="icon icon-container">
+                    <i className="fas fa-truck mover"></i> 
+                  </div>
+                  <Link to={"/VerPedidos"} className="small-box-footer">
+                    Ver mis pedidos <i className="fas fa-arrow-circle-right"></i>
+                  </Link>
+                </div>
+              </div>
             </div>
             </div>
         </section>

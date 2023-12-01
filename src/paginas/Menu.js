@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
 import Navbar from "../componentes/Navbar";
 import SidebarContainer from "../componentes/SidebarContainer";
 import ContentHeader from "../componentes/ContentHeader";
 import Footer from "../componentes/Footer";
 import { Link } from "react-router-dom";
 import "../css/menu.css"
-import APIInvoke from "../utils/APIInvoke";
 const Menu = () => {
 
   return (
@@ -14,7 +12,7 @@ const Menu = () => {
       <SidebarContainer></SidebarContainer>
       <div className="content-wrapper">
         <ContentHeader
-          titulo={"Panel de Administrador"}
+          titulo={"Panel Tienda"}
           breadCrumb1={"Inicio"}
           breadCrumb2={"Panel de Administrador"}
           ruta1={"/Menu"} 
@@ -60,12 +58,11 @@ const Menu = () => {
                   <div className="icon icon-container">
                     <i className="fas fa-truck mover"></i> 
                   </div>
-                  <Link to={"/VerPedidos"} className="small-box-footer">
+                  <Link to={"/VerPedidos1"} className="small-box-footer">
                     Ver pedidos <i className="fas fa-arrow-circle-right"></i>
                   </Link>
                 </div>
               </div>
-
             </div>
           </div>
         </section>

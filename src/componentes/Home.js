@@ -35,11 +35,10 @@ const Home = () => {
                         <p>Categorias</p>
                     </Link>
                 </li>
-
                 <li className="nav-item" style={listItemStyle}>
-                    <Link to={"/VerPedidos"} className="nav-link">
+                    <Link to={"/VerPedidos1"} className="nav-link">
                         <i className="nav-icon fas fa-truck" />
-                        <p>Pedidos</p>
+                        <p>Ver Pedidos</p>
                     </Link>
                 </li>
             </ul>
